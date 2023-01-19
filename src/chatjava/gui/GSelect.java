@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import static chatjava.gui.GFrame.changePanel;
+import static chatjava.gui.GProfile.setProfileName;
 
 public class GSelect extends JPanel {
     private JLabel ipAddressLabel = new JLabel("Indirizzo IP: ");
@@ -24,7 +25,7 @@ public class GSelect extends JPanel {
     }
 
     private void sendConfirmation() {
-        // TODO: Completa l'implementazione
+        setProfileName(nameField.getText());
         changePanel("Chat");
     }
 
@@ -37,7 +38,7 @@ public class GSelect extends JPanel {
         this.add(nameLabel);
         this.add(nameField);
 
-        confirmButton.addActionListener(evt -> this.sendConfirmation());
+        confirmButton.addActionListener(evt -> sendConfirmation());
 
         this.add(confirmButton);
     }

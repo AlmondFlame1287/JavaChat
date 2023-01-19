@@ -8,6 +8,7 @@ public class GPanel extends JPanel {
         this.setLayout(null);
 
         this.add(new GProfile());
+        this.add(new GChatPane());
         this.add(new GChat());
     }
 }
