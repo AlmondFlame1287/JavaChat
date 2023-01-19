@@ -25,6 +25,8 @@ public class GChat extends JPanel {
     private void setupButtons() {
         sendButton.setBounds(720, 530, 70, 20);
         this.add(sendButton);
+
+        sendButton.addActionListener(evt -> GChatPane.addMessage(chat.getText()));
     }
 
     private void setupChatTextArea() {
