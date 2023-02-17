@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import chatjava.gui.chat.GProfile;
+
 public class GFrame extends JFrame {
     private static CardLayout layout = new CardLayout();
     private static JPanel mainPanel = new JPanel(layout);

@@ -1,4 +1,4 @@
-package chatjava.gui;
+package chatjava.gui.chat;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
