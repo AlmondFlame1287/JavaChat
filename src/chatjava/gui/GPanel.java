@@ -4,10 +4,10 @@ import javax.swing.JPanel;
 
 public class GPanel extends JPanel {
 
-    public GPanel() {
+    public GPanel(GProfile profile) {
         this.setLayout(null);
 
-        this.add(new GProfile());
+        this.add(profile);
         this.add(new GChat());
     }
 }
