@@ -25,12 +25,14 @@ public class GFrame extends JFrame {
 
     private void setupMainPanel() {
         mainPanel.add(new GSelect(), "Select");
-        mainPanel.add(new GPanel(), "Chat");
 
         layout.show(mainPanel, "Select");
     }
 
-    public static void changePanel(String panel) {
+    public static void changePanel(String panel, String profileName) {
+        if(panel.startsWith("C")) {
+            mainPanel.add(new GPanel(new GProfile(profileName)), "Chat");
+        }
         layout.show(mainPanel, panel);
     }
 }
