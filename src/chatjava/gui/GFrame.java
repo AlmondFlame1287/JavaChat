@@ -33,7 +33,7 @@ public class GFrame extends JFrame {
 
     public static void changePanel(String panel, String profileName) {
         if(panel.startsWith("C")) {
-            mainPanel.add(new GPanel(new GProfile(profileName)), "Chat");
+            mainPanel.add(new GContainer(new GProfile(profileName)), "Chat");
         }
         layout.show(mainPanel, panel);
     }
