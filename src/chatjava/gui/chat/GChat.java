@@ -1,4 +1,4 @@
-package chatjava.gui;
+package chatjava.gui.chat;
 
 import java.awt.Color;
 import java.awt.Dimension;
