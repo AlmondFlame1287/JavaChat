@@ -7,6 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
+
+import chatjava.gui.GPanel;
+
 import javax.swing.JScrollPane;
 
 public class GChat extends JPanel {
@@ -24,6 +27,9 @@ public class GChat extends JPanel {
 
     private void setupButtons() {
         sendButton.setBounds(720, 530, 70, 20);
+        sendButton.addActionListener(evt -> {
+            GPanel.getInstance().addMessage(chat.getText());
+        });
         this.add(sendButton);
     }
 

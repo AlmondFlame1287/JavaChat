@@ -10,7 +10,7 @@ public class GContainer extends JScrollPane {
         this.setLayout(null);
 
         this.add(profile);
-        this.add(new GPanel());
+        this.add(GPanel.getInstance());
         this.add(new GChat());
     }
 }
