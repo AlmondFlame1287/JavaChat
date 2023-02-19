@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import chatjava.tcp.ClientConnecter;
-// import chatjava.tcp.Server;
+import chatjava.tcp.Server;
 
 import static chatjava.gui.GFrame.changePanel;
 
@@ -40,6 +40,8 @@ public class GSelect extends JPanel {
 
         if (m.find()) {
             ClientConnecter.getInstance().connect(ipAdd, connectionPort);
+            Server.getInstance().connect(ipAdd, connectionPort);
+
             changePanel("Chat", nameField.getText());
         } else {
             errorCode.setText("Impossibile connettersi. Indirizzo IP errato");
