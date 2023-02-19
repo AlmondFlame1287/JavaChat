@@ -9,10 +9,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import chatjava.tcp.ClientConnecter;
+// import chatjava.tcp.Server;
+
 import static chatjava.gui.GFrame.changePanel;
-import static chatjava.tcp.Connecter.connect;
 
 public class GSelect extends JPanel {
+    private final int connectionPort = 7777;
+
     private JLabel ipAddressLabel = new JLabel("Indirizzo IP: ");
     private JLabel nameLabel = new JLabel("Nome: ");
     private JLabel errorCode = new JLabel();
@@ -30,11 +34,12 @@ public class GSelect extends JPanel {
     private void sendConfirmation() {
         // TODO: Completa l'implementazione
         String ipAdd = ipAddress.getText();
-        Pattern regex = Pattern.compile("(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])");
+        Pattern regex = Pattern.compile(
+                "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])");
         Matcher m = regex.matcher(ipAdd);
-        
-        if(m.find()) {
-            connect(ipAdd);
+
+        if (m.find()) {
+            ClientConnecter.getInstance().connect(ipAdd, connectionPort);
             changePanel("Chat", nameField.getText());
         } else {
             errorCode.setText("Impossibile connettersi. Indirizzo IP errato");
@@ -54,9 +59,9 @@ public class GSelect extends JPanel {
         this.add(ipAddress);
         this.add(nameLabel);
         this.add(nameField);
-        
+
         confirmButton.addActionListener(evt -> this.sendConfirmation());
-        
+
         this.add(confirmButton);
         this.add(errorCode);
     }
