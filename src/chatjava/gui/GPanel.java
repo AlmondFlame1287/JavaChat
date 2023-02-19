@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import chatjava.tcp.ClientConnecter;
+import chatjava.tcp.Server;
 
 public class GPanel extends JPanel {
     private static GPanel instance = null;
@@ -20,7 +21,10 @@ public class GPanel extends JPanel {
         this.setLayout(layout);
         this.setBounds(40, 65, 800, 450);
 
-        endTransmission.addActionListener(evt -> ClientConnecter.getInstance().stopConnection());
+        endTransmission.addActionListener(evt -> {
+            ClientConnecter.getInstance().stopConnection();
+            Server.getInstance().stopConnection();
+        });
         this.add(endTransmission);
     }
 
@@ -45,13 +49,5 @@ public class GPanel extends JPanel {
 
         this.repaint();
         this.revalidate();
-    }
-
-    // TODO: Da eliminare nella fase di pubblicazione
-    private void test() {
-        for (int i = 0; i < 28; i++) {
-            messages.add(new JLabel(String.valueOf(i)));
-            this.add(messages.get(i));
-        }
     }
 }
