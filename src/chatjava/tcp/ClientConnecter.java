@@ -19,10 +19,10 @@ public class ClientConnecter implements ConnectionInterface {
     }
 
     @Override
-    public void connect(String ipAddress, int port) {
+    public void connect(final String ipAddress, final int port) {
         try {
             this.connectionSocket = new Socket(ipAddress, port);
-            System.out.println("Connessione iniziata");
+            System.out.println("DEBUG: Connessione iniziata");
         } catch (IOException ie) {
             System.err.println("Qualcosa e' andato storto (Connessione al server)");
         }
