@@ -27,6 +27,7 @@ public class GFrame extends JFrame {
 
     private void setupMainPanel() {
         mainPanel.add(new GSelect(), "Select");
+        mainPanel.add(GServ.getInstance(), "Server");
 
         layout.show(mainPanel, "Select");
     }
