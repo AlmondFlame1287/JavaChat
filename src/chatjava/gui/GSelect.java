@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import chatjava.tcp.ClientConnecter;
-import chatjava.tcp.Server;
 
 import static chatjava.gui.GFrame.changePanel;
 
@@ -25,6 +24,7 @@ public class GSelect extends JPanel {
     private JTextField nameField = new JTextField();
 
     private JButton confirmButton = new JButton("Conferma");
+    private JButton host = new JButton("Fai da host");
 
     public GSelect() {
         this.setPreferredSize(new Dimension(800, 600));
@@ -40,7 +40,6 @@ public class GSelect extends JPanel {
 
         if (m.find()) {
             ClientConnecter.getInstance().connect(ipAdd, connectionPort);
-            Server.getInstance().connect(ipAdd, connectionPort);
 
             changePanel("Chat", nameField.getText());
         } else {
@@ -56,6 +55,9 @@ public class GSelect extends JPanel {
 
         ipAddress.setPreferredSize(new Dimension(160, 20));
         nameField.setPreferredSize(new Dimension(100, 20));
+
+        host.addActionListener(evt -> changePanel("Server", null));
+        this.add(host);
 
         this.add(ipAddressLabel);
         this.add(ipAddress);
