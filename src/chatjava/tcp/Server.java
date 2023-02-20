@@ -1,15 +1,15 @@
 package chatjava.tcp;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+
+import chatjava.gui.GServ;
 
 public class Server implements ConnectionInterface {
     private static Server instance = null;
     private ServerSocket serv;
+    private Socket client;
 
     private Server() {
     }
@@ -35,30 +35,32 @@ public class Server implements ConnectionInterface {
     public void connect(final String ipAddress, final int port) {
         if(!this.createServer(port)) {
             System.err.println("Qualcosa e' andato storto (Creazione server)");
+            return;
         }
 
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 while(!serv.isClosed()) {
                     try {
                         System.out.println("DEBUG: Server in attesa");
-                        Socket client = serv.accept();
+                        client = serv.accept();
                         System.out.println("DEBUG: Client connesso");
 
-                        OutputStream clientOut = client.getOutputStream();
-                        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(clientOut));
-
-                        writer.write("Connessione effettuata sul server.");
+                        GServ.getInstance().addReadMessage(client.getInputStream());
+    
+                        // BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(clientOut));
+    
+                        // writer.write("Connessione effettuata sul server.");
                         
-                        writer.close();
-                        client.close();
-                        System.out.println("DEBUG: Connessione terminata");
+                        // writer.close();
+                        // client.close();
+                        // System.out.println("DEBUG: Connessione terminata");
                     } catch(IOException ie) {
                         System.err.println("Qualcosa e' andato storto (Server thread)");
                         Thread.currentThread().interrupt();
                     }
-                } 
+                }
             }
         }.start();
     }
