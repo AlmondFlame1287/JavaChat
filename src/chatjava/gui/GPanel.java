@@ -8,7 +8,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import chatjava.tcp.ClientConnecter;
-import chatjava.tcp.Server;
 
 public class GPanel extends JPanel {
     private static GPanel instance = null;
@@ -23,7 +22,7 @@ public class GPanel extends JPanel {
 
         endTransmission.addActionListener(evt -> {
             ClientConnecter.getInstance().stopConnection();
-            Server.getInstance().stopConnection();
+            // Server.getInstance().stopConnection();
         });
         this.add(endTransmission);
     }
