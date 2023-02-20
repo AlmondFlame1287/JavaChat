@@ -9,6 +9,7 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
 import chatjava.gui.GPanel;
+import chatjava.tcp.ClientConnecter;
 
 import javax.swing.JScrollPane;
 
@@ -29,6 +30,7 @@ public class GChat extends JPanel {
         sendButton.setBounds(720, 530, 70, 20);
         sendButton.addActionListener(evt -> {
             GPanel.getInstance().addMessage(chat.getText());
+            ClientConnecter.getInstance().sendMessage(chat.getText());
         });
         this.add(sendButton);
     }
@@ -43,9 +45,5 @@ public class GChat extends JPanel {
         chatArea.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 
         this.add(chatArea);
-    }
-
-    public String getTextAreaText() {
-        return chat.getText();
     }
 }
