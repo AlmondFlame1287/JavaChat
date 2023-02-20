@@ -64,15 +64,10 @@ public class GServ extends JPanel {
         stopButton.setEnabled(false);
     }
 
-    public void addReadMessage(InputStream messageStream) {
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(messageStream))){
-            System.out.println("Messaggio ricevuto: " + br.readLine());
-            this.add(new JLabel(br.readLine()));
-            this.revalidate();
-            this.repaint();
-        } catch (IOException ie) {
-            System.err.println("Qualcosa e' andato storto (Aggiunta messaggio)");
-            ie.printStackTrace();
-        }
+    public void addReadMessage(String message) {
+        System.out.println("Messaggio ricevuto: " + message);
+        this.add(new JLabel(message));
+        this.revalidate();
+        // this.repaint();
     }
 }

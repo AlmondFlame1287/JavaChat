@@ -1,8 +1,7 @@
 package chatjava.tcp;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 public class ClientConnecter implements ConnectionInterface {
@@ -27,9 +26,8 @@ public class ClientConnecter implements ConnectionInterface {
             public void run() {
                 try {
                     connectionSocket = new Socket(ipAddress, port);
-                    System.out.println("DEBUG: Connessione iniziata");
-                } catch (IOException ie) {
-                    System.err.println("Qualcosa e' andato storto (Connessione al server)");
+                } catch(IOException ie) {
+                    System.out.println(ie.getMessage());
                 }
             }
         }.start();
@@ -48,13 +46,22 @@ public class ClientConnecter implements ConnectionInterface {
     }
 
     public void sendMessage(String text) {
-        try {
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connectionSocket.getOutputStream()));
-            writer.write(text);
-            System.out.println("Messaggio inviato: " + text);
-        } catch (IOException ie) {
-            System.out.println("Qualcosa e' andato storto (Scrittura messaggio)");
-            ie.printStackTrace();
+        try (PrintWriter out = new PrintWriter(this.connectionSocket.getOutputStream(), true)) {
+            while(!this.connectionSocket.isClosed()) {
+                out.println(text);
+            }
+        } catch(IOException ie) {
+            System.out.println(ie.getMessage());
         }
+        
+        // try {
+        //     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connectionSocket.getOutputStream()));
+        //     writer.write(text);
+        //     writer.close();
+        //     System.out.println("Messaggio inviato: " + text);
+        // } catch (IOException ie) {
+        //     System.out.println("Qualcosa e' andato storto (Scrittura messaggio)");
+        //     ie.printStackTrace();
+        // }
     }
 }

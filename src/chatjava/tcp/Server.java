@@ -1,6 +1,8 @@
 package chatjava.tcp;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -9,7 +11,7 @@ import chatjava.gui.GServ;
 public class Server implements ConnectionInterface {
     private static Server instance = null;
     private ServerSocket serv;
-    private Socket client;
+    // private Socket client;
 
     private Server() {
     }
@@ -41,25 +43,18 @@ public class Server implements ConnectionInterface {
         new Thread() {
             @Override
             public void run() {
-                while(!serv.isClosed()) {
-                    try {
-                        System.out.println("DEBUG: Server in attesa");
-                        client = serv.accept();
-                        System.out.println("DEBUG: Client connesso");
-
-                        GServ.getInstance().addReadMessage(client.getInputStream());
-    
-                        // BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(clientOut));
-    
-                        // writer.write("Connessione effettuata sul server.");
-                        
-                        // writer.close();
-                        // client.close();
-                        // System.out.println("DEBUG: Connessione terminata");
-                    } catch(IOException ie) {
-                        System.err.println("Qualcosa e' andato storto (Server thread)");
-                        Thread.currentThread().interrupt();
+                try (Socket client = serv.accept();
+                     BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream()))
+                     ) 
+                {
+                    
+                    String inputLine;
+                    while((inputLine = br.readLine()) != null) {
+                        GServ.getInstance().addReadMessage(inputLine);
                     }
+
+                } catch(IOException ie) {
+                    System.out.println(ie.getMessage());
                 }
             }
         }.start();
