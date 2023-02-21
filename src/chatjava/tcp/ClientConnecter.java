@@ -8,6 +8,8 @@ public class ClientConnecter implements ConnectionInterface {
     private static ClientConnecter instance = null;
     private Socket connectionSocket;
 
+    private PrintWriter out;
+
     private ClientConnecter() {
 
     }
@@ -21,16 +23,11 @@ public class ClientConnecter implements ConnectionInterface {
 
     @Override
     public void connect(final String ipAddress, final int port) {
-        new Thread(){
-            @Override
-            public void run() {
-                try {
-                    connectionSocket = new Socket(ipAddress, port);
-                } catch(IOException ie) {
-                    System.out.println(ie.getMessage());
-                }
-            }
-        }.start();
+        try {
+            connectionSocket = new Socket(ipAddress, port);
+        } catch (IOException ie) {
+            System.out.println(ie.getMessage());
+        }
     }
 
     @Override
@@ -40,28 +37,20 @@ public class ClientConnecter implements ConnectionInterface {
 
         try {
             this.connectionSocket.close();
+            if (this.out != null)
+                this.out.close();
         } catch (IOException ie) {
             System.err.println("Qualcosa e' andato storto (Chiusura connessione)");
         }
     }
 
     public void sendMessage(String text) {
-        try (PrintWriter out = new PrintWriter(this.connectionSocket.getOutputStream(), true)) {
-            while(!this.connectionSocket.isClosed()) {
-                out.println(text);
-            }
-        } catch(IOException ie) {
+        try {
+            if (this.out == null)
+                out = new PrintWriter(this.connectionSocket.getOutputStream(), true);
+            out.println(text);
+        } catch (IOException ie) {
             System.out.println(ie.getMessage());
         }
-        
-        // try {
-        //     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connectionSocket.getOutputStream()));
-        //     writer.write(text);
-        //     writer.close();
-        //     System.out.println("Messaggio inviato: " + text);
-        // } catch (IOException ie) {
-        //     System.out.println("Qualcosa e' andato storto (Scrittura messaggio)");
-        //     ie.printStackTrace();
-        // }
     }
 }

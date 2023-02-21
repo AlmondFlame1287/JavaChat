@@ -6,5 +6,6 @@ import javax.swing.SwingUtilities;
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(GFrame::new);
+        System.out.println(ProcessHandle.current().pid());
     }
 }

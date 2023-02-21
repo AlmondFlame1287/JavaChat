@@ -17,7 +17,7 @@ public class Server implements ConnectionInterface {
     }
 
     public static Server getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new Server();
         }
         return instance;
@@ -35,7 +35,7 @@ public class Server implements ConnectionInterface {
 
     @Override
     public void connect(final String ipAddress, final int port) {
-        if(!this.createServer(port)) {
+        if (!this.createServer(port)) {
             System.err.println("Qualcosa e' andato storto (Creazione server)");
             return;
         }
@@ -44,26 +44,24 @@ public class Server implements ConnectionInterface {
             @Override
             public void run() {
                 try (Socket client = serv.accept();
-                     BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream()))
-                     ) 
-                {
-                    
+                        BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream()))) {
                     String inputLine;
-                    while((inputLine = br.readLine()) != null) {
+                    while ((inputLine = br.readLine()) != null) {
                         GServ.getInstance().addReadMessage(inputLine);
                     }
-
-                } catch(IOException ie) {
+                } catch (IOException ie) {
                     System.out.println(ie.getMessage());
                 }
             }
         }.start();
+
     }
 
     @Override
     public void stopConnection() {
-        if(this.serv == null) return;
-        
+        if (this.serv == null)
+            return;
+
         try {
             this.serv.close();
         } catch (IOException ie) {
