@@ -9,11 +9,6 @@ import chatjava.tcp.Server;
 
 import static chatjava.gui.GFrame.changePanel;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
 public class GServ extends JPanel {
     private static GServ instance = null;
 
@@ -32,7 +27,7 @@ public class GServ extends JPanel {
     }
 
     public static GServ getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new GServ();
         }
         return instance;
@@ -68,6 +63,5 @@ public class GServ extends JPanel {
         System.out.println("Messaggio ricevuto: " + message);
         this.add(new JLabel(message));
         this.revalidate();
-        // this.repaint();
     }
 }

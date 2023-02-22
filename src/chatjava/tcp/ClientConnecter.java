@@ -25,6 +25,7 @@ public class ClientConnecter implements ConnectionInterface {
     public void connect(final String ipAddress, final int port) {
         try {
             connectionSocket = new Socket(ipAddress, port);
+            out = new PrintWriter(this.connectionSocket.getOutputStream(), true);
         } catch (IOException ie) {
             System.out.println(ie.getMessage());
         }
@@ -45,12 +46,6 @@ public class ClientConnecter implements ConnectionInterface {
     }
 
     public void sendMessage(String text) {
-        try {
-            if (this.out == null)
-                out = new PrintWriter(this.connectionSocket.getOutputStream(), true);
-            out.println(text);
-        } catch (IOException ie) {
-            System.out.println(ie.getMessage());
-        }
+        out.println(text);
     }
 }

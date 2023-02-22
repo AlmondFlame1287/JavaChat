@@ -11,7 +11,6 @@ import chatjava.gui.GServ;
 public class Server implements ConnectionInterface {
     private static Server instance = null;
     private ServerSocket serv;
-    // private Socket client;
 
     private Server() {
     }
