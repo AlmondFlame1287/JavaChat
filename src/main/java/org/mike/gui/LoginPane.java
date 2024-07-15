@@ -1,8 +1,12 @@
 package org.mike.gui;
 
+import org.mike.User;
+
 import javax.swing.*;
 
 public class LoginPane extends JPanel {
+    private JTextField profileName;
+    private JTextField ipAddress;
     private final JFrame parentClass;
 
     public LoginPane(JFrame parentClass) {
@@ -16,8 +20,8 @@ public class LoginPane extends JPanel {
         JLabel profile = new JLabel("Profile name:");
         JLabel ip = new JLabel("IP Address:");
 
-        JTextField profileName = new JTextField();
-        JTextField ipAddress = new JTextField();
+        profileName = new JTextField();
+        ipAddress = new JTextField();
 
         this.add(profile);
         this.add(profileName);
@@ -46,8 +50,12 @@ public class LoginPane extends JPanel {
     }
 
     private void onDone() {
-        // TODO: Load contacts from a save file
-        this.parentClass.setContentPane(new ContentPane());
+        User user = User.getUser();
+        user.setName(profileName.getText());
+        user.setIpAddress(ipAddress.getText());
+        user.createUserFile();
+
+        this.parentClass.setContentPane(new ContentPane(user));
         this.parentClass.revalidate();
     }
 }
