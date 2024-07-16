@@ -17,8 +17,12 @@ public class Message implements Drawable {
         this.dateTime = dateTime;
         this.message = message;
         this.sender = sender;
+        this.drawingRectangle = defineRectangleSize();
+    }
+
+    private Rectangle defineRectangleSize() {
         // TODO: This is only the default message rectangle. Make it resize itself for longer messages
-        this.drawingRectangle = new Rectangle(10, 70, 400, 60);
+        return new Rectangle(10, 70, 400, 60);
     }
 
     @Override

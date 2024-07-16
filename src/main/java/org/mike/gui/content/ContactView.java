@@ -13,17 +13,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ContactView extends JPanel implements MouseListener {
-    private User currentUser;
+    private static ContactView instance;
+
     private ArrayList<Contact> contacts;
 
-    public ContactView(User user) {
-        this.currentUser = user;
+    private ContactView() {
         this.contacts = this.readContacts();
     }
 
+    public static ContactView getInstance() {
+        if(instance == null)
+            instance = new ContactView();
+        return instance;
+    }
+
     private ArrayList<Contact> readContacts() {
+        User currentUser = User.getUser();
+
         if(!currentUser.getUserFile().exists())
             return null;
+
         ArrayList<Contact> contactArrayList = new ArrayList<>();
 
         try(FileReader fr = new FileReader(currentUser.getUserFile()); BufferedReader br = new BufferedReader(fr)) {

@@ -1,7 +1,5 @@
 package org.mike;
 
-//import java.awt.*;
-
 import org.mike.gui.Drawable;
 
 import java.awt.*;
@@ -13,13 +11,12 @@ public class Contact implements Drawable {
     private String name;
     private String userIP;
 
-    private final Rectangle rectangle;
+    private static final Rectangle rectangle = new Rectangle(10, 70, 400, 60);
 //    private Image profilePicture;
 
     public Contact(String name, String userIP) {
         this.name = name;
         this.userIP = userIP;
-        this.rectangle = new Rectangle(10, 70, 400, 60);
     }
 
     public String getName() {
@@ -33,9 +30,13 @@ public class Contact implements Drawable {
     @Override
     public void draw(Graphics g) {
         g.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
-        rectangle.y += 20;
-        g.drawString(this.name, rectangle.x, rectangle.y);
-        rectangle.y += 30;
-        g.drawString(this.getUserIP(), rectangle.x, rectangle.y);
+        g.drawString(this.name, rectangle.x+10, rectangle.y+20);
+        g.drawString(this.userIP, rectangle.x+10, rectangle.y+40);
+        rectangle.y += 60;
+    }
+
+    @Override
+    public String toString() {
+        return this.name + "," + this.userIP;
     }
 }

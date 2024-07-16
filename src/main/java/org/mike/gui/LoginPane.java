@@ -55,7 +55,7 @@ public class LoginPane extends JPanel {
         user.setIpAddress(ipAddress.getText());
         user.createUserFile();
 
-        this.parentClass.setContentPane(new ContentPane(user));
+        this.parentClass.setContentPane(new ContentPane());
         this.parentClass.revalidate();
     }
 }

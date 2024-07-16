@@ -10,9 +10,9 @@ public class ContentPane extends JSplitPane {
     private ChatView chatView;
     private ContactView contactView;
 
-    public ContentPane(User user) {
+    public ContentPane() {
         chatView = new ChatView();
-        contactView = new ContactView(user);
+        contactView = ContactView.getInstance();
         this.setLeftComponent(contactView);
         this.setRightComponent(chatView);
 

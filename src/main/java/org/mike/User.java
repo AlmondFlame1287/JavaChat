@@ -2,10 +2,7 @@ package org.mike;
 
 import org.mike.common.Constants;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class User {
     private static User instance;
@@ -37,9 +34,8 @@ public class User {
     }
 
     public void appendContactToFile(Contact toAppend) {
-        try(FileWriter fw = new FileWriter(userFile); BufferedWriter bw = new BufferedWriter(fw)) {
-            String contact = toAppend.getName() + "," + toAppend.getUserIP() + "\n";
-            bw.append(contact);
+        try(FileWriter fw = new FileWriter(userFile, true); BufferedWriter bw = new BufferedWriter(fw);) {
+            bw.write(toAppend.toString() + "\n");
         } catch(IOException ioe) {
             System.err.println("There was a problem appending a contact in your file: " + ioe.getMessage());
         }
