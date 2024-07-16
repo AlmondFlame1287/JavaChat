@@ -66,7 +66,7 @@ public class ContactView extends JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        // TODO: Return clickedContact to ContactArea
     }
 
     @Override

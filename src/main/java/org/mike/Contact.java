@@ -27,6 +27,10 @@ public class Contact implements Drawable {
         return userIP;
     }
 
+    public static Rectangle getRectangle() {
+        return rectangle;
+    }
+
     @Override
     public void draw(Graphics g) {
         g.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
