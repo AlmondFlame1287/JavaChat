@@ -3,17 +3,18 @@ package org.mike;
 import org.mike.gui.Drawable;
 
 import java.awt.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Message implements Drawable {
     public static final int MESSAGE_CHARACTER_LIMIT = 300;
 
     private final String message;
-    private final Date dateTime;
+    private final LocalDateTime dateTime;
     private final String sender;
     private final Rectangle drawingRectangle;
 
-    public Message(Date dateTime, String message, String sender) {
+    public Message(LocalDateTime dateTime, String message, String sender) {
         this.dateTime = dateTime;
         this.message = message;
         this.sender = sender;
@@ -27,7 +28,11 @@ public class Message implements Drawable {
 
     @Override
     public void draw(Graphics g) {
+        int width = g.getFontMetrics().stringWidth(this.message);
+        Rectangle messageRectangle = new Rectangle(10, 10, width, 20);
 
+        g.drawRect(messageRectangle.x, messageRectangle.y, messageRectangle.width, messageRectangle.height);
+        g.drawString(this.message, messageRectangle.x, messageRectangle.y+10);
     }
 
     @Override

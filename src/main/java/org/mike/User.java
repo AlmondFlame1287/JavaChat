@@ -20,7 +20,7 @@ public class User {
     }
 
     public void createUserFile() {
-        this.userFile = new File(Constants.CHAT_PATH + "/" + this.name + ".txt");
+        this.userFile = new File(Constants.CHAT_PATH + this.name + ".txt");
 
         if(userFile.exists())
             return;

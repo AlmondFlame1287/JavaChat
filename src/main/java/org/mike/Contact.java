@@ -1,8 +1,11 @@
 package org.mike;
 
+import org.mike.common.Constants;
 import org.mike.gui.Drawable;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Contact implements Drawable {
     // TODO: Add a bio
@@ -10,13 +13,18 @@ public class Contact implements Drawable {
 
     private String name;
     private String userIP;
+    private File messageFile;
 
-    private static final Rectangle rectangle = new Rectangle(10, 70, 400, 60);
+    private Rectangle rectangle;
 //    private Image profilePicture;
+    public static int latestRectangleYPos = 20;
 
     public Contact(String name, String userIP) {
         this.name = name;
         this.userIP = userIP;
+        this.createContactFile();
+        rectangle = new Rectangle(10, latestRectangleYPos, 400, 60);
+        latestRectangleYPos += 60;
     }
 
     public String getName() {
@@ -27,16 +35,32 @@ public class Contact implements Drawable {
         return userIP;
     }
 
-    public static Rectangle getRectangle() {
-        return rectangle;
+    public Rectangle getRectangle() { return rectangle; }
+
+    public void createContactFile() {
+        this.messageFile = new File(Constants.CONTACT_MESSAGES_PATH + "to" + this.name + ".txt");
+
+        if(messageFile.exists())
+            return;
+
+        try {
+            new File(Constants.CONTACT_MESSAGES_PATH).mkdirs();
+            messageFile.createNewFile();
+        } catch(IOException ioe) {
+            System.err.println("There was a problem creating the Contact file: " + ioe.getMessage());
+        }
+    }
+
+    public File getMessageFile() {
+        return messageFile;
     }
 
     @Override
     public void draw(Graphics g) {
+        System.out.println("[DEBUG][CONTACT]: " + this.rectangle + "; latestRectYPos: " + latestRectangleYPos);
         g.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
         g.drawString(this.name, rectangle.x+10, rectangle.y+20);
         g.drawString(this.userIP, rectangle.x+10, rectangle.y+40);
-        rectangle.y += 60;
     }
 
     @Override

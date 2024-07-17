@@ -1,30 +1,43 @@
 package org.mike.gui.components;
 
 import org.mike.Contact;
+import org.mike.gui.content.ContactView;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class ContactArea extends JPanel {
+    private static ContactArea instance = null;
+    private JLabel contactName;
 
-    public ContactArea(Contact current) {
-        this.setLayout(null);
-        this.setSize(new Dimension(853, 60));
-        this.setup(current);
+    public static ContactArea getInstance() {
+        if(instance == null)
+            instance = new ContactArea();
+        return instance;
     }
 
-    private void setup(Contact current) {
+    private ContactArea() {
+        this.setLayout(null);
+        this.setSize(new Dimension(853, 60));
+        this.setup();
+    }
+
+    private void setup() {
         // TODO: Further development needed
         this.setBorder(BorderFactory.createEtchedBorder());
 
-        JLabel label;
-        if(current == null) {
-             label = new JLabel("Test");
-        } else {
-            label = new JLabel(current.getName());
-        }
+        this.contactName = new JLabel();
 
-        label.setBounds(300, 20, 200, 20);
-        this.add(label);
+        this.contactName.setBounds(300, 20, 200, 20);
+        this.add(this.contactName);
+    }
+
+    public void updateArea() {
+        Contact current = ContactView.getInstance().getPressedContact();
+
+        if(current == null) return;
+
+        this.contactName.setText(current.getName());
+        this.revalidate();
     }
 }

@@ -2,6 +2,8 @@ package org.mike.gui.content;
 
 import org.mike.Contact;
 import org.mike.User;
+import org.mike.gui.components.ContactArea;
+import org.mike.gui.components.MessageArea;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,10 +16,12 @@ import java.util.ArrayList;
 
 public class ContactView extends JPanel implements MouseListener {
     private static ContactView instance;
+    private Contact currentContact;
 
     private ArrayList<Contact> contacts;
 
     private ContactView() {
+        this.addMouseListener(this);
         this.contacts = this.readContacts();
     }
 
@@ -64,9 +68,29 @@ public class ContactView extends JPanel implements MouseListener {
         }
     }
 
+    public Contact getPressedContact() {
+        return this.currentContact;
+    }
+
+    private Contact checkContactClicked(Point cursorPos) {
+        for(Contact c : contacts) {
+            if(c.getRectangle().contains(cursorPos)) {
+                System.out.println("Contact Clicked: " + c.getName());
+                return c;
+            }
+        }
+
+        return null;
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
         // TODO: Return clickedContact to ContactArea
+        Point cursorPos = new Point(e.getX(), e.getY());
+        this.currentContact = checkContactClicked(cursorPos);
+        MessageArea.getInstance().readMessages();
+
+        ContactArea.getInstance().updateArea();
     }
 
     @Override
