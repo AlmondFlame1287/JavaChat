@@ -15,7 +15,7 @@ public class ChatView extends JPanel {
 
 
     public ChatView() {
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setLayout(null);
         this.contactArea = ContactArea.getInstance();
         this.messageArea = MessageArea.getInstance();
         this.textArea = new TextArea();
@@ -27,5 +27,9 @@ public class ChatView extends JPanel {
         this.add(contactArea);
         this.add(messageArea);
         this.add(textArea);
+
+        this.contactArea.setBounds(0, 0, 853, 150);
+        this.messageArea.setBounds(0, 151, 853, 420);
+        this.textArea.setBounds(0, 572, 853, 150);
     }
 }
