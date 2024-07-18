@@ -57,7 +57,6 @@ public class Contact implements Drawable {
 
     @Override
     public void draw(Graphics g) {
-        System.out.println("[DEBUG][CONTACT]: " + this.rectangle + "; latestRectYPos: " + latestRectangleYPos);
         g.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
         g.drawString(this.name, rectangle.x+10, rectangle.y+20);
         g.drawString(this.userIP, rectangle.x+10, rectangle.y+40);

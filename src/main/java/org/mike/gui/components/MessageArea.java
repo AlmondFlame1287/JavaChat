@@ -39,9 +39,10 @@ public class MessageArea extends JPanel {
         // TODO: Localize the sender of the message
         // As for now, it's only gonna be the dev
         String sender = User.getUser().getName();
+        Message msg = new Message(dateTime, text, sender);
 
-        this.messages.add(new Message(dateTime, text, sender));
-        this.repaint();
+        this.messages.add(msg);
+        msg.draw(this.getGraphics());
     }
 
     public void readMessages() {

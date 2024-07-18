@@ -12,27 +12,28 @@ public class Message implements Drawable {
     private final String message;
     private final LocalDateTime dateTime;
     private final String sender;
-    private final Rectangle drawingRectangle;
+    private Rectangle drawingRectangle;
+    private static int latestMessageYPos = 70;
 
     public Message(LocalDateTime dateTime, String message, String sender) {
         this.dateTime = dateTime;
         this.message = message;
         this.sender = sender;
-        this.drawingRectangle = defineRectangleSize();
     }
 
-    private Rectangle defineRectangleSize() {
-        // TODO: This is only the default message rectangle. Make it resize itself for longer messages
-        return new Rectangle(10, 70, 400, 60);
+    private Rectangle defineRectangleSize(int width) {
+        Rectangle r = new Rectangle(10, latestMessageYPos, width, 30);
+        latestMessageYPos += 31;
+        return r;
     }
 
     @Override
     public void draw(Graphics g) {
         int width = g.getFontMetrics().stringWidth(this.message);
-        Rectangle messageRectangle = new Rectangle(10, 10, width, 20);
+        drawingRectangle = defineRectangleSize(width);
 
-        g.drawRect(messageRectangle.x, messageRectangle.y, messageRectangle.width, messageRectangle.height);
-        g.drawString(this.message, messageRectangle.x, messageRectangle.y+10);
+        g.drawRect(drawingRectangle.x, drawingRectangle.y, drawingRectangle.width+5, drawingRectangle.height);
+        g.drawString(this.message, drawingRectangle.x+2, drawingRectangle.y+16);
     }
 
     @Override
