@@ -45,24 +45,24 @@ public class MessageArea extends JPanel {
         msg.draw(this.getGraphics());
     }
 
-    public void readMessages() {
-        File contactFile = ContactView.getInstance().getPressedContact().getMessageFile();
-        if(!contactFile.exists())
-            return;
-
-        ArrayList<Message> messageArray = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader(contactFile))) {
-            String line;
-            while((line = br.readLine()) != null) {
-                String[] splits = line.split(",");
-                messageArray.add(new Message(LocalDateTime.parse(splits[0]), splits[1], splits[2]));
-            }
-        } catch(IOException ioe) {
-            System.err.println("There was a problem reading messages: " + ioe.getMessage());
-        }
-
-        messages = messageArray;
-    }
+//    public void readMessages() {
+//        File contactFile = ContactView.getInstance().getPressedContact().getMessageFile();
+//        if(!contactFile.exists())
+//            return;
+//
+//        ArrayList<Message> messageArray = new ArrayList<>();
+//        try(BufferedReader br = new BufferedReader(new FileReader(contactFile))) {
+//            String line;
+//            while((line = br.readLine()) != null) {
+//                String[] splits = line.split(",");
+//                messageArray.add(new Message(LocalDateTime.parse(splits[0]), splits[1], splits[2]));
+//            }
+//        } catch(IOException ioe) {
+//            System.err.println("There was a problem reading messages: " + ioe.getMessage());
+//        }
+//
+//        messages = messageArray;
+//    }
 
     private void drawMessages(Graphics g) {
         if(messages == null)
