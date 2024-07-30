@@ -1,6 +1,5 @@
 package org.mike.gui.content;
 
-import org.mike.Contact;
 import org.mike.gui.components.ContactArea;
 import org.mike.gui.components.MessageArea;
 import org.mike.gui.components.TextArea;
@@ -25,6 +24,7 @@ public class ChatView extends JPanel {
 
     private void addAreas() {
         this.add(contactArea);
+        // TODO: Add scrollpane to messageArea
         this.add(messageArea);
         this.add(textArea);
 

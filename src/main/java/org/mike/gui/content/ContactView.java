@@ -51,9 +51,15 @@ public class ContactView extends JPanel {
         return contactArrayList;
     }
 
+    public void addContact(Contact contact) {
+        User.getUser().appendContactToFile(contact);
+        this.add(new ContactButton(contact));
+        this.revalidate();
+    }
+
     private void addContacts() {
         for(Contact c : this.contacts) {
-            this.add(new ContactButton(c.toString()));
+            this.add(new ContactButton(c));
         }
 
         this.revalidate();

@@ -32,4 +32,11 @@ public class ContactArea extends JPanel {
         this.add(this.contactName);
     }
 
+    public void setContact(Contact current) {
+        contactName.setText(current.getName());
+        // TODO: Load profile picture
+        // TODO: Load current's conversation
+
+        this.revalidate();
+    }
 }
