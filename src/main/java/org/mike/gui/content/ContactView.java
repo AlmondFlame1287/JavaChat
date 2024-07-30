@@ -2,6 +2,8 @@ package org.mike.gui.content;
 
 import org.mike.Contact;
 import org.mike.User;
+import org.mike.gui.components.ContactButton;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.BufferedReader;
@@ -11,12 +13,11 @@ import java.util.ArrayList;
 
 public class ContactView extends JPanel {
     private static ContactView instance;
-    private Contact currentContact;
 
-    private ArrayList<Contact> contacts;
+    private final ArrayList<Contact> contacts;
 
     private ContactView() {
-        this.setLayout(new GridLayout(24, 1));
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setPreferredSize(new Dimension(427, 720));
         this.contacts = readContacts();
         this.addContacts();
@@ -52,7 +53,7 @@ public class ContactView extends JPanel {
 
     private void addContacts() {
         for(Contact c : this.contacts) {
-            this.add(new JButton(c.toString()));
+            this.add(new ContactButton(c.toString()));
         }
 
         this.revalidate();

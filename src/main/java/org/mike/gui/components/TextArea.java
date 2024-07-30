@@ -29,9 +29,6 @@ public class TextArea extends JPanel {
 
     private void onSend() {
         // TODO: Continue development
-        System.out.println("Further development needed");
-//        System.out.println("Message:" + messageField.getText());
         MessageArea.getInstance().addMessage(messageField.getText());
-//        String messageToSend = this.messageField.getText();
     }
 }
