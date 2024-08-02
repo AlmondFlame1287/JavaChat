@@ -31,7 +31,7 @@ public class ChatView extends JPanel {
         this.add(textArea);
 
         this.contactArea.setBounds(0, 0, 853, 100);
-        scrollPane.setBounds(0, 101, 844, 541);
-        this.textArea.setBounds(0, 642, 853, 80);
+        scrollPane.setBounds(0, 101, 824, 501);
+        this.textArea.setBounds(0, 602, 853, 80);
     }
 }
