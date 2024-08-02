@@ -25,11 +25,13 @@ public class ChatView extends JPanel {
     private void addAreas() {
         this.add(contactArea);
         // TODO: Add scrollpane to messageArea
-        this.add(messageArea);
+//        this.add(messageArea);
+        JScrollPane scrollPane = new JScrollPane(messageArea);
+        this.add(scrollPane);
         this.add(textArea);
 
         this.contactArea.setBounds(0, 0, 853, 150);
-        this.messageArea.setBounds(0, 151, 853, 420);
+        scrollPane.setBounds(0, 151, 844, 420);
         this.textArea.setBounds(0, 572, 853, 150);
     }
 }
