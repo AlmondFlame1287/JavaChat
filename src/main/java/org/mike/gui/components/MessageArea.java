@@ -18,8 +18,9 @@ public class MessageArea extends JPanel {
     private ArrayList<Message> messages;
 
     private MessageArea() {
-        this.setLayout(null);
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.messages = new ArrayList<>();
+        this.drawMessages();
     }
 
     public static MessageArea getInstance() {
@@ -28,48 +29,23 @@ public class MessageArea extends JPanel {
         return instance;
     }
 
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        this.drawMessages(g);
-    }
-
     public void addMessage(String text) {
-        LocalDateTime dateTime = LocalDateTime.now();
         // TODO: Localize the sender of the message
         // As for now, it's only gonna be the dev
+        LocalDateTime dateTime = LocalDateTime.now();
         String sender = User.getUser().getName();
         Message msg = new Message(dateTime, text, sender);
 
         this.messages.add(msg);
-        msg.draw(this.getGraphics());
+        this.add(msg.getMessageLabel());
+        this.revalidate();
     }
 
-    public void readMessages() {
-        File contactFile = ContactView.getInstance().getPressedContact().getMessageFile();
-        if(!contactFile.exists())
-            return;
-
-        ArrayList<Message> messageArray = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader(contactFile))) {
-            String line;
-            while((line = br.readLine()) != null) {
-                String[] splits = line.split(",");
-                messageArray.add(new Message(LocalDateTime.parse(splits[0]), splits[1], splits[2]));
-            }
-        } catch(IOException ioe) {
-            System.err.println("There was a problem reading messages: " + ioe.getMessage());
-        }
-
-        messages = messageArray;
-    }
-
-    private void drawMessages(Graphics g) {
-        if(messages == null)
-            return;
-
+    private void drawMessages() {
         for(Message msg : messages) {
-            msg.draw(g);
+            this.add(msg.getMessageLabel());
         }
+
+        this.revalidate();
     }
 }

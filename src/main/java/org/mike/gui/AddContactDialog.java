@@ -1,7 +1,6 @@
 package org.mike.gui;
 
 import org.mike.Contact;
-import org.mike.User;
 import org.mike.gui.content.ContactView;
 
 import javax.swing.*;
@@ -49,12 +48,7 @@ public class AddContactDialog extends JDialog {
         cancel.setBounds(100, 200, 100, 20);
 
         done.addActionListener(evt -> {
-            Contact newContact = new Contact(name.getText(), ip.getText());
-            ContactView cview = ContactView.getInstance();
-
-            User.getUser().appendContactToFile(newContact);
-            newContact.draw(cview.getGraphics());
-
+            ContactView.getInstance().addContact(new Contact(name.getText(), ip.getText()));
             this.dispose();
         });
 
