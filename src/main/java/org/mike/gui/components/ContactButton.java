@@ -1,6 +1,7 @@
 package org.mike.gui.components;
 
 import org.mike.Contact;
+import org.mike.gui.LoginPane;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,6 +46,7 @@ public class ContactButton extends JButton {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 ContactArea.getInstance().setContact(contact);
+                LoginPane.getClient().connect(contact.getUserIP(), 3333);
             }
         });
     }

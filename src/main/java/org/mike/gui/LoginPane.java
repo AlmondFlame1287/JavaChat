@@ -1,10 +1,15 @@
 package org.mike.gui;
 
 import org.mike.User;
+import org.mike.connection.Client;
+import org.mike.connection.Server;
 
 import javax.swing.*;
 
 public class LoginPane extends JPanel {
+    private static Server serv;
+    private static Client client;
+
     private JTextField profileName;
     private JTextField ipAddress;
     private final JFrame parentClass;
@@ -55,7 +60,20 @@ public class LoginPane extends JPanel {
         user.setIpAddress(ipAddress.getText());
         user.createUserFile();
 
+        serv = new Server();
+        serv.startServer(3333);
+
+        client = new Client();
+
         this.parentClass.setContentPane(new ContentPane());
         this.parentClass.revalidate();
+    }
+
+    public static Server getServer() {
+        return serv;
+    }
+
+    public static Client getClient() {
+        return client;
     }
 }
