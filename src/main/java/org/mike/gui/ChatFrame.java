@@ -1,6 +1,7 @@
 package org.mike.gui;
 
 import org.mike.User;
+import org.mike.connection.Server;
 
 import javax.swing.*;
 

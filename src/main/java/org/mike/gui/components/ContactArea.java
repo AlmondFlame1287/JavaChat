@@ -1,6 +1,7 @@
 package org.mike.gui.components;
 
 import org.mike.Contact;
+import org.mike.gui.LoginPane;
 import org.mike.gui.content.ContactView;
 
 import javax.swing.*;

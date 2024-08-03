@@ -21,10 +21,10 @@ public class Server implements Runnable {
         String aloha = in.readLine();
 
         if(aloha.equals("Aloha")) {
-            System.out.println("[SERVER CONNECTION] Aloha has been received");
+            System.out.println("[SERVER][CONNECTION] Aloha has been received");
             out.print("Aloha");
         } else {
-            System.err.println("[SERVER CONNECTION] Aloha not received");
+            System.err.println("[SERVER][CONNECTION] Aloha not received");
         }
     }
 

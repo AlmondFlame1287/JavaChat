@@ -10,6 +10,7 @@ public class Client {
 
     public void connect(String ip, int port) {
         try {
+            System.out.println("[CLIENT][CONNECTION] Connected to: " + ip);
             this.client = new Socket(ip, port);
             this.in = new BufferedReader(new InputStreamReader(client.getInputStream()));
             this.out = new PrintWriter(client.getOutputStream(), true);
@@ -30,7 +31,6 @@ public class Client {
             this.client.close();
         } catch (IOException e) {
             System.out.println("[CLIENT][CLOSE_CONNECITON] There was a problem: " + e.getMessage());
-            throw new RuntimeException(e);
         }
     }
 }
