@@ -7,6 +7,7 @@ import org.mike.connection.Server;
 import javax.swing.*;
 
 public class LoginPane extends JPanel {
+    // TODO: Remove userip
     private static Server serv;
     private static Client client;
 
@@ -61,7 +62,8 @@ public class LoginPane extends JPanel {
         user.createUserFile();
 
         serv = new Server();
-        serv.startServer(3333);
+        Thread serverThread = new Thread(serv);
+        serverThread.start();
 
         client = new Client();
 
