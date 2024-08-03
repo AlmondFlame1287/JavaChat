@@ -13,6 +13,7 @@ public class Client {
             this.client = new Socket(ip, port);
             this.in = new BufferedReader(new InputStreamReader(client.getInputStream()));
             this.out = new PrintWriter(client.getOutputStream(), true);
+            this.send("Aloha");
         } catch (IOException e) {
             System.err.println("[CLIENT][CONNECTION] There was a problem: " + e.getMessage());
         }
