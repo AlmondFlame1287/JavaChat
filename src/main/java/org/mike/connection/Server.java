@@ -1,6 +1,9 @@
 package org.mike.connection;
 
+import org.mike.Contact;
+import org.mike.gui.components.ContactArea;
 import org.mike.gui.components.MessageArea;
+import org.mike.gui.content.ContactView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,11 +21,12 @@ public class Server implements Runnable {
     public Server() {}
 
     private void checkConnection() throws IOException {
-        String aloha = in.readLine();
+        String[] msgReceived = in.readLine().split(",");
 
-        if(aloha.equals("Aloha")) {
+        if(msgReceived[0].equals("Aloha")) {
             System.out.println("[SERVER][CONNECTION] Aloha has been received");
             out.print("Aloha");
+            ContactView.getInstance().addContact(new Contact(msgReceived[1], msgReceived[2]));
         } else {
             System.err.println("[SERVER][CONNECTION] Aloha not received");
         }
@@ -39,6 +43,7 @@ public class Server implements Runnable {
             this.handleText();
         } catch (IOException ioe) {
             System.err.println("[SERVER][START] There was a problem starting the server:" + ioe.getMessage());
+            this.close();
         }
     }
 

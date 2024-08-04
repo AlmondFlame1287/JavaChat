@@ -31,7 +31,7 @@ public class TextArea extends JPanel {
 
     private void onSend() {
         // TODO: Continue development
-//        MessageArea.getInstance().addMessage(messageField.getText());
+        MessageArea.getInstance().addMessage(messageField.getText());
         LoginPane.getClient().send(messageField.getText());
     }
 }
