@@ -52,6 +52,9 @@ public class ContactView extends JPanel {
     }
 
     public void addContact(Contact contact) {
+        if(contacts.contains(contact))
+            return;
+
         User.getUser().appendContactToFile(contact);
         this.add(new ContactButton(contact));
         this.revalidate();
