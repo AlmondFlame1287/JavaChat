@@ -7,7 +7,6 @@ import java.awt.*;
 
 public class TextArea extends JPanel {
     private JTextField messageField;
-    private JButton send;
 
     public TextArea() {
         this.setLayout(null);
@@ -17,15 +16,15 @@ public class TextArea extends JPanel {
 
     private void setup() {
         this.messageField = new JTextField();
-        this.send = new JButton("Send");
-        this.send.addActionListener(evt -> this.onSend());
+        JButton send = new JButton("Send");
+        send.addActionListener(evt -> this.onSend());
 
         this.setBorder(BorderFactory.createEtchedBorder());
 
         this.messageField.setBounds(100, 10, 450, 20);
-        this.send.setBounds(570, 10, 200, 20);
+        send.setBounds(570, 10, 200, 20);
 
-        this.add(this.send);
+        this.add(send);
         this.add(this.messageField);
     }
 
