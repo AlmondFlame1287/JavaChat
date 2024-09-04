@@ -1,6 +1,7 @@
 package org.mike.gui;
 
 import org.mike.User;
+import org.mike.connection.Server;
 
 import javax.swing.*;
 
@@ -14,6 +15,7 @@ public class LoginPane extends JPanel {
         this.setLayout(null);
         this.initTextFields();
         this.initButtons();
+        this.initServerThread();
     }
 
     private void initTextFields() {
@@ -47,6 +49,10 @@ public class LoginPane extends JPanel {
 
         done.addActionListener(evt -> this.onDone());
         cancel.addActionListener(evt -> System.exit(0));
+    }
+
+    private void initServerThread() {
+        new Thread(Server.getInstance()).start();
     }
 
     private void onDone() {
