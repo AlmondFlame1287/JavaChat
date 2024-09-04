@@ -1,14 +1,17 @@
 package org.mike.gui.components;
 
 import org.mike.Contact;
+import org.mike.connection.Client;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import static org.mike.common.Constants.COMMUNICATION_PORT;
+
 public class ContactButton extends JButton {
-    private final Color hoverBackgroundColor = new Color(0xDDDDDD);;
+    private final Color hoverBackgroundColor = new Color(0xDDDDDD);
     private final Color pressedBackgroundColor = new Color(0xCCCCCC);
     private final Contact contact;
 
@@ -45,6 +48,8 @@ public class ContactButton extends JButton {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 ContactArea.getInstance().setContact(contact);
+                final Client c = new Client(contact.getUserIP(), COMMUNICATION_PORT);
+                new Thread(c).start();
             }
         });
     }
