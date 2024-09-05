@@ -2,6 +2,7 @@ package org.mike;
 
 import javax.swing.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Message {
     public static final int MESSAGE_CHARACTER_LIMIT = 300;
@@ -17,11 +18,9 @@ public class Message {
     }
 
     private String formatDateTime(LocalDateTime dateTime) {
-        final int dayOfYear = dateTime.getDayOfYear();
-        final int hour = dateTime.getHour();
-        final int minute = dateTime.getMinute();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy, HH:mm");
 
-        return dayOfYear + ", " + hour + ":" + minute;
+        return dateTime.format(formatter);
     }
 
     private void checkMessageLength(String msg) {
@@ -35,6 +34,10 @@ public class Message {
 
     public JLabel getMessageLabel() {
         return new JLabel(this.toString());
+    }
+
+    public String getText() {
+        return message;
     }
 
     @Override
