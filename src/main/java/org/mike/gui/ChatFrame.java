@@ -39,15 +39,23 @@ public class ChatFrame extends JFrame {
     }
 
     private void setupMenuBar() {
-        JMenuBar menuBar = new JMenuBar();
-        JMenu contactsMenu = new JMenu("Contacts");
-        JMenuItem addContact = new JMenuItem("Add");
+        final JMenuBar menuBar = new JMenuBar();
 
+        final JMenu userMenu = new JMenu("User");
+        final JMenuItem settings = new JMenuItem("Settings");
+
+        final JMenu contactsMenu = new JMenu("Contacts");
+        final JMenuItem addContact = new JMenuItem("Add");
+
+        menuBar.add(userMenu);
         menuBar.add(contactsMenu);
+
         contactsMenu.add(addContact);
+        userMenu.add(settings);
 
         this.setJMenuBar(menuBar);
         addContact.addActionListener(evt -> this.addContactPressed());
+        settings.addActionListener(evt -> this.settingsPressed());
     }
 
     private void addContactPressed() {
@@ -55,5 +63,11 @@ public class ChatFrame extends JFrame {
             return;
 
         new AddContactDialog();
+    }
+
+    private void settingsPressed() {
+        if(User.getUser().getName() == null) return;
+
+        new SettingsDialog();
     }
 }
