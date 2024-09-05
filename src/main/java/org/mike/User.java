@@ -2,11 +2,13 @@ package org.mike;
 
 import org.mike.common.Constants;
 
+import java.awt.*;
 import java.io.*;
 
 public class User {
     private static User instance;
     private String name;
+    private Image profilePicture;
     private String ipAddress;
     private File userFile;
 
@@ -47,6 +49,10 @@ public class User {
 
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
+    }
+
+    public void setProfilePicture(Image profilePicture) {
+        this.profilePicture = profilePicture;
     }
 
     public String getName() {
