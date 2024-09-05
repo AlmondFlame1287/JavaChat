@@ -15,7 +15,7 @@ public class Contact {
     private File messageFile;
 
     private Rectangle rectangle;
-//    private Image profilePicture;
+    private Image profilePicture;
     public static int latestRectangleYPos = 20;
 
     public Contact(String name, String userIP) {
