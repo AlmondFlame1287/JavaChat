@@ -74,7 +74,7 @@ public class Server implements Runnable {
 
     public void send(Message message) {
         assert this.outputStreamer != null;
-        this.outputStreamer.println(message);
+        this.outputStreamer.println(message.getText());
     }
 
     public void closeServer() {
