@@ -29,13 +29,7 @@ public class MessageArea extends JPanel {
         return instance;
     }
 
-    public void addMessage(String text) {
-        // TODO: Localize the sender of the message
-        // As for now, it's only gonna be the dev
-        LocalDateTime dateTime = LocalDateTime.now();
-        String sender = User.getUser().getName();
-        Message msg = new Message(dateTime, text, sender);
-
+    public void addMessage(Message msg) {
         this.messages.add(msg);
         this.add(msg.getMessageLabel());
         this.revalidate();
