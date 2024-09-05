@@ -1,21 +1,13 @@
 package org.mike.gui.components;
 
 import org.mike.Message;
-import org.mike.User;
-import org.mike.gui.content.ContactView;
 
 import javax.swing.*;
-import java.awt.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class MessageArea extends JPanel {
     private static MessageArea instance = null;
-    private ArrayList<Message> messages;
+    private final ArrayList<Message> messages;
 
     private MessageArea() {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
