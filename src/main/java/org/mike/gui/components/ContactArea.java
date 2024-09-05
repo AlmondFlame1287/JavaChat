@@ -1,7 +1,6 @@
 package org.mike.gui.components;
 
 import org.mike.Contact;
-import org.mike.gui.content.ContactView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,5 +37,9 @@ public class ContactArea extends JPanel {
         // TODO: Load current's conversation
 
         this.revalidate();
+    }
+
+    public String getContactName() {
+        return contactName.getText();
     }
 }
