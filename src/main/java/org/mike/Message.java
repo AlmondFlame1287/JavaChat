@@ -3,19 +3,25 @@ package org.mike;
 import javax.swing.*;
 import java.time.LocalDateTime;
 
-public class Message /*implements Drawable*/ {
+public class Message {
     public static final int MESSAGE_CHARACTER_LIMIT = 300;
 
     private String message;
-    private final LocalDateTime dateTime;
+    private final String dateTime;
     private final String sender;
-    private transient JLabel messageLabel;
 
     public Message(LocalDateTime dateTime, String message, String sender) {
-        this.dateTime = dateTime;
+        this.dateTime = this.formatDateTime(dateTime);
         this.checkMessageLength(message);
         this.sender = sender;
-        this.messageLabel = new JLabel(this.message);
+    }
+
+    private String formatDateTime(LocalDateTime dateTime) {
+        final int dayOfYear = dateTime.getDayOfYear();
+        final int hour = dateTime.getHour();
+        final int minute = dateTime.getMinute();
+
+        return dayOfYear + ", " + hour + ":" + minute;
     }
 
     private void checkMessageLength(String msg) {
@@ -28,11 +34,11 @@ public class Message /*implements Drawable*/ {
     }
 
     public JLabel getMessageLabel() {
-        return messageLabel;
+        return new JLabel(this.toString());
     }
 
     @Override
     public String toString() {
-        return this.dateTime + "," + this.message + "," + this.sender;
+        return this.dateTime + " | " + this.sender + ": " + this.message;
     }
 }
