@@ -1,5 +1,7 @@
 package org.mike.connection;
 
+import org.mike.Message;
+
 import static org.mike.common.Constants.COMMUNICATION_PORT;
 
 import java.io.*;
@@ -70,7 +72,7 @@ public class Server implements Runnable {
         }
     }
 
-    public void send(String message) {
+    public void send(Message message) {
         assert this.outputStreamer != null;
         this.outputStreamer.println(message);
     }
