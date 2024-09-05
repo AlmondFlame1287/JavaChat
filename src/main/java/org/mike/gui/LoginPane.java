@@ -7,7 +7,6 @@ import javax.swing.*;
 
 public class LoginPane extends JPanel {
     private JTextField profileName;
-    private JTextField ipAddress;
     private final JFrame parentClass;
 
     public LoginPane(JFrame parentClass) {
@@ -20,21 +19,13 @@ public class LoginPane extends JPanel {
 
     private void initTextFields() {
         JLabel profile = new JLabel("Profile name:");
-        JLabel ip = new JLabel("IP Address:");
-
         profileName = new JTextField();
-        ipAddress = new JTextField();
 
         this.add(profile);
         this.add(profileName);
-        this.add(ip);
-        this.add(ipAddress);
 
         profile.setBounds(540, 180, 100, 20);
         profileName.setBounds(540, 200, 200, 20);
-
-        ip.setBounds(540, 220, 100, 20);
-        ipAddress.setBounds(540, 240, 200, 20);
     }
 
     private void initButtons() {
@@ -44,8 +35,8 @@ public class LoginPane extends JPanel {
         this.add(done);
         this.add(cancel);
 
-        done.setBounds(540, 260, 100, 20);
-        cancel.setBounds(640, 260, 100, 20);
+        done.setBounds(540, 230, 100, 20);
+        cancel.setBounds(640, 230, 100, 20);
 
         done.addActionListener(evt -> this.onDone());
         cancel.addActionListener(evt -> System.exit(0));
@@ -58,7 +49,6 @@ public class LoginPane extends JPanel {
     private void onDone() {
         User user = User.getUser();
         user.setName(profileName.getText());
-        user.setIpAddress(ipAddress.getText());
         user.createUserFile();
 
         this.parentClass.setContentPane(new ContentPane());
