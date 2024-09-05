@@ -1,9 +1,12 @@
 package org.mike.connection;
 
+import org.mike.Message;
+import org.mike.gui.components.ContactArea;
 import org.mike.gui.components.MessageArea;
 
 import java.io.*;
 import java.net.Socket;
+import java.time.LocalDateTime;
 import java.util.logging.Logger;
 
 public class Client implements Runnable {
@@ -47,7 +50,7 @@ public class Client implements Runnable {
             while((serverMessage = serverReader.readLine()) != null) {
                 // TODO: Check this
                 clientLogger.info("Message got from server:" + serverMessage);
-                MessageArea.getInstance().addMessage(serverMessage);
+                MessageArea.getInstance().addMessage(new Message(LocalDateTime.now(), serverMessage, ContactArea.getInstance().getContactName()));
             }
         } catch (IOException ioe) {
             clientLogger.severe("Couldn't handle communication: " + ioe.getMessage());
