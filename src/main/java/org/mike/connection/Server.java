@@ -2,10 +2,7 @@ package org.mike.connection;
 
 import static org.mike.common.Constants.COMMUNICATION_PORT;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Logger;
@@ -21,6 +18,7 @@ public class Server implements Runnable {
     private Socket connectedClient;
 
     // Input and output stuff
+    private BufferedReader inputReader;
     private PrintStream outputStreamer;
 
     private Server() {}
@@ -36,6 +34,10 @@ public class Server implements Runnable {
             serverLogger.info("Starting connection on port: " + COMMUNICATION_PORT);
             serv = new ServerSocket(COMMUNICATION_PORT);
             connectedClient = serv.accept();
+
+            this.inputReader = new BufferedReader(new InputStreamReader(connectedClient.getInputStream()));
+            this.outputStreamer = new PrintStream(connectedClient.getOutputStream());
+
             serverLogger.info("Connection established");
         } catch (IOException ioe) {
             serverLogger.severe("Couldn't start the server: " + ioe.getMessage());
@@ -44,13 +46,15 @@ public class Server implements Runnable {
     }
 
     private void handleCommunication() {
-        if(connectedClient == null) return;
+        serverLogger.entering("Server", "handleCommunication");
+        if(connectedClient == null) {
+            serverLogger.warning("Connected client is null");
+            return;
+        }
 
         String message;
 
-        try(BufferedReader inputReader = new BufferedReader(new InputStreamReader(connectedClient.getInputStream()))) {
-            outputStreamer = new PrintStream(connectedClient.getOutputStream());
-
+        try {
             while(!connectedClient.isClosed()) {
                 if((message = inputReader.readLine()) == null) {
                     serverLogger.severe("NULL MESSAGE DETECTED, SHUTTING DOWN CONNECTION");
@@ -67,14 +71,14 @@ public class Server implements Runnable {
     }
 
     public void send(String message) {
-        outputStreamer.println(message);
+        assert this.outputStreamer != null;
+        this.outputStreamer.println(message);
     }
 
     public void closeServer() {
         try {
             this.connectedClient.close();
             this.serv.close();
-            this.outputStreamer.close();
         } catch(IOException ioe) {
             serverLogger.severe("There was a problem closing the server: " + ioe.getMessage());
             System.exit(-1);

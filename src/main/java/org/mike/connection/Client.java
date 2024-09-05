@@ -14,7 +14,7 @@ public class Client implements Runnable {
     private final String ip;
     private final int port;
 
-    private PrintWriter serverWriter;
+//    private PrintWriter serverWriter;
     private BufferedReader serverReader;
 
     private Socket socket;
@@ -33,7 +33,7 @@ public class Client implements Runnable {
             clientLogger.info("Connection established");
 
             this.serverReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            this.serverWriter = new PrintWriter(socket.getOutputStream(), true);
+//            this.serverWriter = new PrintWriter(socket.getOutputStream(), true);
 
             this.handleCommunication();
         } catch (IOException ioe) {
@@ -53,11 +53,19 @@ public class Client implements Runnable {
             }
         } catch (IOException ioe) {
             clientLogger.severe("Couldn't handle communication: " + ioe.getMessage());
+            this.closeClient();
         }
     }
 
     public void closeClient() {
-
+        try {
+            this.socket.close();
+            this.serverReader.close();
+//            this.serverWriter.close();
+        } catch (IOException ioe) {
+            clientLogger.severe("Couldn't close client: " + ioe.getMessage());
+            System.exit(-1);
+        }
     }
 
     @Override
