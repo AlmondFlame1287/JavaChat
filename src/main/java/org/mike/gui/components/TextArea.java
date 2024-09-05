@@ -1,9 +1,12 @@
 package org.mike.gui.components;
 
+import org.mike.Message;
+import org.mike.User;
 import org.mike.connection.Server;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDateTime;
 
 public class TextArea extends JPanel {
     private JTextField messageField;
@@ -29,7 +32,9 @@ public class TextArea extends JPanel {
     }
 
     private void onSend() {
-        Server.getInstance().send(messageField.getText());
-        MessageArea.getInstance().addMessage(messageField.getText());
+        Message message = new Message(LocalDateTime.now(), messageField.getText(), User.getUser().getName());
+
+        Server.getInstance().send(message);
+        MessageArea.getInstance().addMessage(message);
     }
 }
