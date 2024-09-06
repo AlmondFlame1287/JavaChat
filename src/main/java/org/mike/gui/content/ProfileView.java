@@ -22,9 +22,11 @@ public class ProfileView extends JPanel {
     }
 
     public void displayUserImage() {
-        final Image userPfp = User.getUser().getProfilePicture().getScaledInstance(100, 96, Image.SCALE_SMOOTH);
+        final Image userPfp = User.getUser().getProfilePicture();
         if(userPfp == null) return;
-        this.getGraphics().drawImage(userPfp, 0, 2, null);
+
+        final Image scaledPfp = userPfp.getScaledInstance(100, 96, Image.SCALE_SMOOTH);
+        this.getGraphics().drawImage(scaledPfp, 0, 0, null);
     }
 
     public static ProfileView getInstance() {
