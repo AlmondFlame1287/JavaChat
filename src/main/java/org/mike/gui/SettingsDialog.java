@@ -9,10 +9,12 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class SettingsDialog extends JDialog {
     private static Image img;
+    private static File imgFile;
 
     public SettingsDialog() {
         this.setLayout(null);
@@ -41,7 +43,7 @@ public class SettingsDialog extends JDialog {
 
         chooseFile.addActionListener(evt -> this.chooseFilePressed());
         done.addActionListener(evt -> {
-            User.getUser().setProfilePicture(img);
+            User.getUser().setProfilePicture(img, imgFile);
             ProfileView.getInstance().displayUserImage();
             this.dispose();
         });
@@ -57,9 +59,10 @@ public class SettingsDialog extends JDialog {
         if(result != JFileChooser.APPROVE_OPTION) return;
 
         try {
-            BufferedImage imgRead = ImageIO.read(jfc.getSelectedFile());
+            imgFile = jfc.getSelectedFile();
+            BufferedImage imgRead = ImageIO.read(imgFile);
             img = imgRead.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
-            this.getGraphics().drawImage(img, 10, 50, null);
+            this.getGraphics().drawImage(img, 10, 70, null);
         } catch (IOException ignored) {}
     }
 }
