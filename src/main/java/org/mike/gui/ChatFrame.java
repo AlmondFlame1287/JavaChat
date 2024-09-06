@@ -62,12 +62,12 @@ public class ChatFrame extends JFrame {
         if(User.getUser().getName() == null)
             return;
 
-        new AddContactDialog();
+        SwingUtilities.invokeLater(AddContactDialog::new);
     }
 
     private void settingsPressed() {
         if(User.getUser().getName() == null) return;
 
-        new SettingsDialog();
+        SwingUtilities.invokeLater(SettingsDialog::new);
     }
 }
