@@ -1,12 +1,16 @@
 package org.mike.connection;
 
 import org.mike.Message;
+import org.mike.gui.components.ContactArea;
 
 import static org.mike.common.Constants.COMMUNICATION_PORT;
+import static org.mike.common.Constants.PICTURE_PORT;
+import static org.mike.common.Constants.CONTACT_MESSAGES_PATH;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Server implements Runnable {
@@ -16,7 +20,7 @@ public class Server implements Runnable {
     private static final Logger serverLogger = Logger.getLogger(Server.class.getName());
 
     // Server stuff
-    private ServerSocket serv;
+    private ServerSocket communicationServer;
     private Socket connectedClient;
 
     // Input and output stuff
@@ -31,11 +35,11 @@ public class Server implements Runnable {
         return instance;
     }
 
-    public void startServer() {
+    public void startCommunicationServer() {
         try {
             serverLogger.info("Starting connection on port: " + COMMUNICATION_PORT);
-            serv = new ServerSocket(COMMUNICATION_PORT);
-            connectedClient = serv.accept();
+            this.communicationServer = new ServerSocket(COMMUNICATION_PORT);
+            this.connectedClient = this.communicationServer.accept();
 
             this.inputReader = new BufferedReader(new InputStreamReader(connectedClient.getInputStream()));
             this.outputStreamer = new PrintStream(connectedClient.getOutputStream());
@@ -45,6 +49,31 @@ public class Server implements Runnable {
             serverLogger.severe("Couldn't start the server: " + ioe.getMessage());
             // TODO: Add offline mode detection
         }
+    }
+
+    public void startPictureServer() {
+        serverLogger.entering("Server", "startPictureServer");
+
+        try(
+                final ServerSocket pictureServer = new ServerSocket(PICTURE_PORT);
+                final Socket pictureClient = pictureServer.accept();
+                final InputStream inputStream = pictureClient.getInputStream();
+                final FileOutputStream toFileStream = new FileOutputStream(CONTACT_MESSAGES_PATH + "pfp.jpg");
+                //  + ContactArea.getInstance().getContactName()
+        ) {
+            final byte[] buffer = new byte[4096]; // 4096 arbitrary value
+            int bytesRead;
+
+            while((bytesRead = inputStream.read(buffer)) != -1) {
+                toFileStream.write(buffer, 0, bytesRead);
+                serverLogger.log(Level.INFO, "Read a byte");
+            }
+
+        } catch (IOException ioe) {
+            serverLogger.warning("Something went wrong with the picture server:" + ioe.getMessage());
+        }
+
+        serverLogger.exiting("Server", "startPictureServer");
     }
 
     private void handleCommunication() {
@@ -80,7 +109,7 @@ public class Server implements Runnable {
     public void closeServer() {
         try {
             this.connectedClient.close();
-            this.serv.close();
+            this.communicationServer.close();
         } catch(IOException ioe) {
             serverLogger.severe("There was a problem closing the server: " + ioe.getMessage());
             System.exit(-1);
@@ -89,7 +118,8 @@ public class Server implements Runnable {
 
     @Override
     public void run() {
-        this.startServer();
+        this.startCommunicationServer();
+        new Thread(this::startPictureServer).start();
         this.handleCommunication();
     }
 }
