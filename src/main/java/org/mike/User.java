@@ -66,4 +66,8 @@ public class User {
     public File getUserFile() {
         return userFile;
     }
+
+    public Image getProfilePicture() {
+        return this.profilePicture;
+    }
 }
