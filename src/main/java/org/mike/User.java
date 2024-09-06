@@ -37,7 +37,7 @@ public class User {
     }
 
     public void appendContactToFile(Contact toAppend) {
-        try(FileWriter fw = new FileWriter(userFile, true); BufferedWriter bw = new BufferedWriter(fw);) {
+        try(FileWriter fw = new FileWriter(userFile, true); BufferedWriter bw = new BufferedWriter(fw)) {
             bw.write(toAppend.toString() + "\n");
         } catch(IOException ioe) {
             System.err.println("There was a problem appending a contact in your file: " + ioe.getMessage());

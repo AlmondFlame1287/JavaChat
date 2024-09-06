@@ -1,7 +1,6 @@
 package org.mike.connection;
 
 import org.mike.Message;
-import org.mike.gui.components.ContactArea;
 
 import static org.mike.common.Constants.COMMUNICATION_PORT;
 import static org.mike.common.Constants.PICTURE_PORT;
@@ -58,7 +57,7 @@ public class Server implements Runnable {
                 final ServerSocket pictureServer = new ServerSocket(PICTURE_PORT);
                 final Socket pictureClient = pictureServer.accept();
                 final InputStream inputStream = pictureClient.getInputStream();
-                final FileOutputStream toFileStream = new FileOutputStream(CONTACT_MESSAGES_PATH + "pfp.jpg");
+                final FileOutputStream toFileStream = new FileOutputStream(CONTACT_MESSAGES_PATH + "pfp.jpg")
                 //  + ContactArea.getInstance().getContactName()
         ) {
             final byte[] buffer = new byte[4096]; // 4096 arbitrary value
