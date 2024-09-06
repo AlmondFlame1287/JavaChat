@@ -11,6 +11,7 @@ public class User {
     private Image profilePicture;
     private String ipAddress;
     private File userFile;
+    private File profilePictureFile;
 
     private User() {
     }
@@ -51,8 +52,9 @@ public class User {
         this.ipAddress = ipAddress;
     }
 
-    public void setProfilePicture(Image profilePicture) {
+    public void setProfilePicture(Image profilePicture, File profilePictureFile) {
         this.profilePicture = profilePicture;
+        this.profilePictureFile = profilePictureFile;
     }
 
     public String getName() {
@@ -65,6 +67,10 @@ public class User {
 
     public File getUserFile() {
         return userFile;
+    }
+
+    public File getProfilePictureFile() {
+        return profilePictureFile;
     }
 
     public Image getProfilePicture() {
