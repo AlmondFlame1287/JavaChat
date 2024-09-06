@@ -1,6 +1,7 @@
 package org.mike.gui;
 
 import org.mike.User;
+import org.mike.gui.content.ProfileView;
 
 import static org.mike.common.Constants.USER_DIR;
 
@@ -18,6 +19,7 @@ public class SettingsDialog extends JDialog {
         this.setSize(640, 480);
         this.initText();
         this.initButtons();
+        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setVisible(true);
     }
@@ -40,6 +42,7 @@ public class SettingsDialog extends JDialog {
         chooseFile.addActionListener(evt -> this.chooseFilePressed());
         done.addActionListener(evt -> {
             User.getUser().setProfilePicture(img);
+            ProfileView.getInstance().displayUserImage();
             this.dispose();
         });
 
@@ -58,11 +61,5 @@ public class SettingsDialog extends JDialog {
             img = imgRead.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
             this.getGraphics().drawImage(img, 10, 50, null);
         } catch (IOException ignored) {}
-    }
-
-    public static Image getImg() {
-        return img;
-        // TODO: Render this image in the other parts of the chat
-        // TODO: Send this image via socket
     }
 }
