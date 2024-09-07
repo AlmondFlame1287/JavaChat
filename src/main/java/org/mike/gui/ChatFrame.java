@@ -20,7 +20,6 @@ public class ChatFrame extends JFrame {
         this.setTitle("JavaChat v" + VERSION);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setupIcon();
-        this.setupMenuBar();
         this.setVisible(true);
     }
 
@@ -37,38 +36,5 @@ public class ChatFrame extends JFrame {
             ImageIO.write(image, "jpg", icon);
             this.setIconImage(ImageIO.read(icon));
         } catch (IOException ignored) {}
-    }
-
-    private void setupMenuBar() {
-        final JMenuBar menuBar = new JMenuBar();
-
-        final JMenu userMenu = new JMenu("User");
-        final JMenuItem settings = new JMenuItem("Settings");
-
-        final JMenu contactsMenu = new JMenu("Contacts");
-        final JMenuItem addContact = new JMenuItem("Add");
-
-        menuBar.add(userMenu);
-        menuBar.add(contactsMenu);
-
-        contactsMenu.add(addContact);
-        userMenu.add(settings);
-
-        this.setJMenuBar(menuBar);
-        addContact.addActionListener(evt -> this.addContactPressed());
-        settings.addActionListener(evt -> this.settingsPressed());
-    }
-
-    private void addContactPressed() {
-        if(User.getUser().getName() == null)
-            return;
-
-        SwingUtilities.invokeLater(AddContactDialog::new);
-    }
-
-    private void settingsPressed() {
-        if(User.getUser().getName() == null) return;
-
-        SwingUtilities.invokeLater(SettingsDialog::new);
     }
 }
