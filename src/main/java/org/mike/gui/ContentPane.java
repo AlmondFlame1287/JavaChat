@@ -11,6 +11,7 @@ public class ContentPane extends JSplitPane {
         final LeftView leftView = LeftView.getInstance();
         final JScrollPane scrollPane = new JScrollPane(leftView);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         this.setLeftComponent(scrollPane);
         this.setRightComponent(chatView);
