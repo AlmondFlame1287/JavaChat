@@ -1,4 +1,4 @@
-package org.mike.gui.components.ui;
+package org.mike.gui.components.customs;
 
 import javax.swing.*;
 import java.awt.*;

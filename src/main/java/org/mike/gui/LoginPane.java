@@ -2,8 +2,8 @@ package org.mike.gui;
 
 import org.mike.User;
 import org.mike.connection.Server;
-import org.mike.gui.components.ui.CustomButton;
-import org.mike.gui.components.ui.CustomTextField;
+import org.mike.gui.components.customs.CustomButton;
+import org.mike.gui.components.customs.CustomTextField;
 
 import javax.swing.*;
 

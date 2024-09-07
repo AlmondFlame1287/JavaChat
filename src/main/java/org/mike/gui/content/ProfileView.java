@@ -3,7 +3,7 @@ package org.mike.gui.content;
 import org.mike.User;
 import org.mike.gui.AddContactDialog;
 import org.mike.gui.SettingsDialog;
-import org.mike.gui.components.ui.CustomButton;
+import org.mike.gui.components.customs.CustomButton;
 
 import javax.swing.*;
 import java.awt.*;

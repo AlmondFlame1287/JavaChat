@@ -1,8 +1,8 @@
 package org.mike.gui;
 
 import org.mike.Contact;
-import org.mike.gui.components.ui.CustomButton;
-import org.mike.gui.components.ui.CustomTextField;
+import org.mike.gui.components.customs.CustomButton;
+import org.mike.gui.components.customs.CustomTextField;
 import org.mike.gui.content.ContactView;
 
 import javax.swing.*;
