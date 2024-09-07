@@ -48,7 +48,6 @@ public class Contact {
             return;
 
         try {
-            new File(Constants.CONTACT_MESSAGES_PATH).mkdirs();
             messageFile.createNewFile();
         } catch(IOException ioe) {
             System.err.println("There was a problem creating the Contact file: " + ioe.getMessage());
