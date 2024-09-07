@@ -1,13 +1,15 @@
 package org.mike.gui;
 
 import org.mike.Contact;
+import org.mike.gui.components.ui.CustomButton;
+import org.mike.gui.components.ui.CustomTextField;
 import org.mike.gui.content.ContactView;
 
 import javax.swing.*;
 
 public class AddContactDialog extends JDialog {
-    private JTextField name;
-    private JTextField ip;
+    private CustomTextField name;
+    private CustomTextField ip;
 
     public AddContactDialog() {
         this.setLayout(null);
@@ -23,8 +25,8 @@ public class AddContactDialog extends JDialog {
         final JLabel nameLabel = new JLabel("Contact name:");
         final JLabel ipLabel = new JLabel("IP:");
 
-        this.name = new JTextField();
-        this.ip = new JTextField();
+        this.name = new CustomTextField();
+        this.ip = new CustomTextField();
 
         this.add(nameLabel);
         this.add(name);
@@ -39,8 +41,8 @@ public class AddContactDialog extends JDialog {
     }
 
     private void initButtons() {
-        final JButton done = new JButton("Done");
-        final JButton cancel = new JButton("Cancel");
+        final CustomButton done = new CustomButton("Done");
+        final CustomButton cancel = new CustomButton("Cancel");
 
         this.add(done);
         this.add(cancel);
