@@ -3,6 +3,7 @@ package org.mike.gui.content;
 import org.mike.gui.components.ContactArea;
 import org.mike.gui.components.MessageArea;
 import org.mike.gui.components.TextArea;
+import org.mike.gui.components.customs.CustomScrollBar;
 
 import javax.swing.*;
 
@@ -24,13 +25,13 @@ public class ChatView extends JPanel {
 
     private void addAreas() {
         this.add(contactArea);
-        // TODO: Add scrollpane to messageArea
-//        this.add(messageArea);
-        JScrollPane scrollPane = new JScrollPane(messageArea);
+
+        final JScrollPane scrollPane = new JScrollPane(messageArea);
         this.add(scrollPane);
         this.add(textArea);
 
         this.contactArea.setBounds(0, 0, 853, 100);
+        scrollPane.setVerticalScrollBar(new CustomScrollBar());
         scrollPane.setBounds(0, 101, 824, 501);
         this.textArea.setBounds(0, 602, 853, 80);
     }

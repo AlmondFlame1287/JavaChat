@@ -1,5 +1,6 @@
 package org.mike.gui;
 
+import org.mike.gui.components.customs.CustomScrollBar;
 import org.mike.gui.content.ChatView;
 import org.mike.gui.content.LeftView;
 
@@ -10,6 +11,7 @@ public class ContentPane extends JSplitPane {
         final ChatView chatView = new ChatView();
         final LeftView leftView = LeftView.getInstance();
         final JScrollPane scrollPane = new JScrollPane(leftView);
+        scrollPane.setVerticalScrollBar(new CustomScrollBar());
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
