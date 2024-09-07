@@ -3,6 +3,7 @@ package org.mike.gui.content;
 import org.mike.User;
 import org.mike.gui.AddContactDialog;
 import org.mike.gui.SettingsDialog;
+import org.mike.gui.components.ui.CustomProfileButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,8 +34,8 @@ public class ProfileView extends JPanel {
     }
 
     private void displayButtons() {
-        final JButton addContact = new JButton("Add contact");
-        final JButton settings = new JButton("Settings");
+        final CustomProfileButton addContact = new CustomProfileButton("Add contact");
+        final CustomProfileButton settings = new CustomProfileButton("Settings");
 
         addContact.setBounds(260, 0, 150, 30);
         settings.setBounds(260, 30, 150, 30);
