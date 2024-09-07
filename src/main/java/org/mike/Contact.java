@@ -2,6 +2,7 @@ package org.mike;
 
 import org.mike.common.Constants;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +26,17 @@ public class Contact {
         rectangle = new Rectangle(10, latestRectangleYPos, 400, 60);
         latestRectangleYPos += 60;
     }
+
+    public void loadProfilePicture() {
+        // TODO: fix this path
+        final File pfpFile = new File(Constants.CHAT_PATH + "pfp.jpg");
+        if(!pfpFile.exists()) return;
+
+        try {
+            this.profilePicture = ImageIO.read(pfpFile);
+        } catch (IOException ignored) {}
+    }
+
 
     public String getName() {
         return name;
@@ -52,6 +64,10 @@ public class Contact {
 
     public File getMessageFile() {
         return messageFile;
+    }
+
+    public Image getProfilePicture() {
+        return profilePicture;
     }
 
     @Override

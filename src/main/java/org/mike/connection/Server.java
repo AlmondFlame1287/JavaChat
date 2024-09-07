@@ -1,6 +1,7 @@
 package org.mike.connection;
 
 import org.mike.Message;
+import org.mike.gui.components.ContactArea;
 
 import static org.mike.common.Constants.COMMUNICATION_PORT;
 import static org.mike.common.Constants.PICTURE_PORT;
@@ -50,7 +51,7 @@ public class Server implements Runnable {
         }
     }
 
-    public void startPictureServer() {
+    public boolean startPictureServer() {
         serverLogger.entering("Server", "startPictureServer");
 
         try(
@@ -68,11 +69,13 @@ public class Server implements Runnable {
                 serverLogger.log(Level.INFO, "Read a byte");
             }
 
+            return true;
         } catch (IOException ioe) {
             serverLogger.warning("Something went wrong with the picture server:" + ioe.getMessage());
+            return false;
+        } finally {
+            serverLogger.exiting("Server", "startPictureServer");
         }
-
-        serverLogger.exiting("Server", "startPictureServer");
     }
 
     private void handleCommunication() {
@@ -118,7 +121,14 @@ public class Server implements Runnable {
     @Override
     public void run() {
         this.startCommunicationServer();
-        new Thread(this::startPictureServer).start();
+        final boolean imageReceived = this.startPictureServer();
+
+        if(imageReceived) {
+            final ContactArea contactArea = ContactArea.getInstance();
+            contactArea.getContact().loadProfilePicture();
+            contactArea.drawProfilePicture();
+        }
+
         this.handleCommunication();
     }
 }

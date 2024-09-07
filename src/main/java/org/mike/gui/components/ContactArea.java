@@ -7,6 +7,7 @@ import java.awt.*;
 
 public class ContactArea extends JPanel {
     private static ContactArea instance = null;
+    private Contact contact;
     private JLabel contactName;
 
     public static ContactArea getInstance() {
@@ -31,12 +32,23 @@ public class ContactArea extends JPanel {
         this.add(this.contactName);
     }
 
+    public void drawProfilePicture() {
+        Image toDraw = this.contact.getProfilePicture();
+        if(toDraw == null) return;
+
+        toDraw = toDraw.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        this.getGraphics().drawImage(toDraw, 0, 0, null);
+    }
+
     public void setContact(Contact current) {
-        contactName.setText(current.getName());
-        // TODO: Load profile picture
-        // TODO: Load current's conversation
+        this.contact = current;
+        this.contactName.setText(this.contact.getName());
 
         this.revalidate();
+    }
+
+    public Contact getContact() {
+        return contact;
     }
 
     public String getContactName() {

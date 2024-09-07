@@ -62,6 +62,7 @@ public class Client implements Runnable {
             }
         } catch (IOException ioe) {
             clientLogger.warning("There was a problem sending the pfp: " + ioe.getMessage());
+            ioe.printStackTrace();
         }
 
         clientLogger.exiting("Client", "sendProfilePicture");
@@ -94,7 +95,7 @@ public class Client implements Runnable {
 
     @Override
     public void run() {
-        new Thread(this::sendProfilePicture).start();
+        this.sendProfilePicture();
         this.connect();
     }
 }
