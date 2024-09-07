@@ -3,11 +3,12 @@ package org.mike.gui;
 import org.mike.User;
 import org.mike.connection.Server;
 import org.mike.gui.components.ui.CustomLoginButton;
+import org.mike.gui.components.ui.CustomTextField;
 
 import javax.swing.*;
 
 public class LoginPane extends JPanel {
-    private JTextField profileName;
+    private CustomTextField profileName;
     private final JFrame parentClass;
 
     public LoginPane(JFrame parentClass) {
@@ -20,13 +21,13 @@ public class LoginPane extends JPanel {
 
     private void initTextFields() {
         JLabel profile = new JLabel("Profile name:");
-        profileName = new JTextField();
+        profileName = new CustomTextField();
 
         this.add(profile);
         this.add(profileName);
 
         profile.setBounds(540, 180, 100, 20);
-        profileName.setBounds(540, 200, 200, 20);
+        profileName.setBounds(540, 200, 200, 25);
     }
 
     private void initButtons() {
