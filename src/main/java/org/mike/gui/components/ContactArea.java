@@ -28,7 +28,7 @@ public class ContactArea extends JPanel {
 
         this.contactName = new JLabel();
 
-        this.contactName.setBounds(300, 20, 200, 20);
+        this.contactName.setBounds(200, 35, 200, 20);
         this.add(this.contactName);
     }
 
