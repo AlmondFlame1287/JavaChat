@@ -2,6 +2,7 @@ package org.mike.gui;
 
 import org.mike.User;
 import org.mike.connection.Server;
+import org.mike.gui.components.ui.CustomLoginButton;
 
 import javax.swing.*;
 
@@ -29,8 +30,8 @@ public class LoginPane extends JPanel {
     }
 
     private void initButtons() {
-        JButton done = new JButton("Done");
-        JButton cancel = new JButton("Cancel");
+        final CustomLoginButton done = new CustomLoginButton("Done");
+        final CustomLoginButton cancel = new CustomLoginButton("Cancel");
 
         this.add(done);
         this.add(cancel);
