@@ -1,15 +1,14 @@
 package org.mike.gui;
 
-import org.mike.User;
-import static org.mike.common.Constants.VERSION;
-import static org.mike.common.Constants.CHAT_PATH;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+
+import static org.mike.common.Constants.CHAT_PATH;
+import static org.mike.common.Constants.VERSION;
 
 public class ChatFrame extends JFrame {
     public ChatFrame() {
@@ -18,7 +17,7 @@ public class ChatFrame extends JFrame {
         this.setContentPane(new LoginPane(this));
         this.setLocationRelativeTo(null);
         this.setTitle("JavaChat v" + VERSION);
-        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setupIcon();
         this.setVisible(true);
     }
