@@ -3,13 +3,15 @@ package org.mike.gui.components;
 import org.mike.Message;
 import org.mike.User;
 import org.mike.connection.Server;
+import org.mike.gui.components.customs.CustomButton;
+import org.mike.gui.components.customs.CustomTextField;
 
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDateTime;
 
 public class TextArea extends JPanel {
-    private JTextField messageField;
+    private CustomTextField messageField;
 
     public TextArea() {
         this.setLayout(null);
@@ -18,14 +20,14 @@ public class TextArea extends JPanel {
     }
 
     private void setup() {
-        this.messageField = new JTextField();
-        JButton send = new JButton("Send");
+        this.messageField = new CustomTextField();
+        final CustomButton send = new CustomButton("Send");
         send.addActionListener(evt -> this.onSend());
 
         this.setBorder(BorderFactory.createEtchedBorder());
 
-        this.messageField.setBounds(100, 10, 450, 20);
-        send.setBounds(570, 10, 200, 20);
+        this.messageField.setBounds(100, 15, 450, 25);
+        send.setBounds(570, 15, 200, 25);
 
         this.add(send);
         this.add(this.messageField);
