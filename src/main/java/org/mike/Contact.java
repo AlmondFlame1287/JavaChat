@@ -29,7 +29,7 @@ public class Contact {
 
     public void loadProfilePicture() {
         // TODO: fix this path
-        final File pfpFile = new File(Constants.CHAT_PATH + "pfp.jpg");
+        final File pfpFile = new File(Constants.CONTACT_MESSAGES_PATH + "pfp.jpg");
         if(!pfpFile.exists()) return;
 
         try {
