@@ -120,8 +120,8 @@ public class Server implements Runnable {
 
     @Override
     public void run() {
-        this.startCommunicationServer();
         final boolean imageReceived = this.startPictureServer();
+        this.startCommunicationServer();
 
         if(imageReceived) {
             final ContactArea contactArea = ContactArea.getInstance();
