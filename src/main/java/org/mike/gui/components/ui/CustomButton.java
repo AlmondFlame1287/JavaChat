@@ -5,12 +5,12 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class CustomLoginButton extends JButton implements MouseListener {
+public class CustomButton extends JButton implements MouseListener {
     private final Color originalColor;
     private final Color hoverColor;
     private final Color pressedColor;
 
-    public CustomLoginButton(String text) {
+    public CustomButton(String text) {
         super(text);
 
         this.originalColor = Color.WHITE;
