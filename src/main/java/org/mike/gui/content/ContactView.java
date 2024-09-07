@@ -18,7 +18,7 @@ public class ContactView extends JPanel {
 
     private ContactView() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setPreferredSize(new Dimension(427, 720));
+        this.setPreferredSize(new Dimension(427, 620));
         this.contacts = readContacts();
         this.addContacts();
     }

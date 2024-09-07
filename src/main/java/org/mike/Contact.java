@@ -1,13 +1,13 @@
 package org.mike;
 
 import org.mike.common.Constants;
-import org.mike.gui.Drawable;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class Contact implements Drawable {
+public class Contact {
     // TODO: Add a bio
     // TODO: Add profile picture support
 
@@ -16,7 +16,7 @@ public class Contact implements Drawable {
     private File messageFile;
 
     private Rectangle rectangle;
-//    private Image profilePicture;
+    private Image profilePicture;
     public static int latestRectangleYPos = 20;
 
     public Contact(String name, String userIP) {
@@ -26,6 +26,17 @@ public class Contact implements Drawable {
         rectangle = new Rectangle(10, latestRectangleYPos, 400, 60);
         latestRectangleYPos += 60;
     }
+
+    public void loadProfilePicture() {
+        // TODO: fix this path
+        final File pfpFile = new File(Constants.CONTACT_MESSAGES_PATH + "pfp.jpg");
+        if(!pfpFile.exists()) return;
+
+        try {
+            this.profilePicture = ImageIO.read(pfpFile);
+        } catch (IOException ignored) {}
+    }
+
 
     public String getName() {
         return name;
@@ -55,11 +66,8 @@ public class Contact implements Drawable {
         return messageFile;
     }
 
-    @Override
-    public void draw(Graphics g) {
-        g.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
-        g.drawString(this.name, rectangle.x+10, rectangle.y+20);
-        g.drawString(this.userIP, rectangle.x+10, rectangle.y+40);
+    public Image getProfilePicture() {
+        return profilePicture;
     }
 
     @Override

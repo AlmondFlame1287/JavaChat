@@ -1,12 +1,15 @@
 package org.mike.connection;
 
 import org.mike.Message;
+import org.mike.User;
 import org.mike.gui.components.ContactArea;
 import org.mike.gui.components.MessageArea;
+import static org.mike.common.Constants.PICTURE_PORT;
 
 import java.io.*;
 import java.net.Socket;
 import java.time.LocalDateTime;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Client implements Runnable {
@@ -43,6 +46,28 @@ public class Client implements Runnable {
         }
     }
 
+    private void sendProfilePicture() {
+        clientLogger.entering("Client", "sendProfilePicture");
+
+        try (final Socket connection = new Socket(this.ip, PICTURE_PORT);
+             final OutputStream outputStream = connection.getOutputStream();
+             final FileInputStream pfpStream = new FileInputStream(User.getUser().getProfilePictureFile())
+        ) {
+            final byte[] buffer = new byte[4096];
+            int bytesRead;
+
+            while((bytesRead = pfpStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+                clientLogger.log(Level.INFO, "Wrote byte");
+            }
+        } catch (IOException ioe) {
+            clientLogger.warning("There was a problem sending the pfp: " + ioe.getMessage());
+            ioe.printStackTrace();
+        }
+
+        clientLogger.exiting("Client", "sendProfilePicture");
+    }
+
     private void handleCommunication() {
         String serverMessage;
 
@@ -70,6 +95,7 @@ public class Client implements Runnable {
 
     @Override
     public void run() {
+        this.sendProfilePicture();
         this.connect();
     }
 }

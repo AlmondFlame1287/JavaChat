@@ -13,6 +13,7 @@ public class AddContactDialog extends JDialog {
         this.setLayout(null);
         this.setSize(300, 300);
         this.initText();
+        this.setLocationRelativeTo(null);
         this.initButtons();
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setVisible(true);

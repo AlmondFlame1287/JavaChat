@@ -2,13 +2,16 @@ package org.mike;
 
 import org.mike.common.Constants;
 
+import java.awt.*;
 import java.io.*;
 
 public class User {
     private static User instance;
     private String name;
+    private Image profilePicture;
     private String ipAddress;
     private File userFile;
+    private File profilePictureFile;
 
     private User() {
     }
@@ -34,7 +37,7 @@ public class User {
     }
 
     public void appendContactToFile(Contact toAppend) {
-        try(FileWriter fw = new FileWriter(userFile, true); BufferedWriter bw = new BufferedWriter(fw);) {
+        try(FileWriter fw = new FileWriter(userFile, true); BufferedWriter bw = new BufferedWriter(fw)) {
             bw.write(toAppend.toString() + "\n");
         } catch(IOException ioe) {
             System.err.println("There was a problem appending a contact in your file: " + ioe.getMessage());
@@ -49,6 +52,11 @@ public class User {
         this.ipAddress = ipAddress;
     }
 
+    public void setProfilePicture(Image profilePicture, File profilePictureFile) {
+        this.profilePicture = profilePicture;
+        this.profilePictureFile = profilePictureFile;
+    }
+
     public String getName() {
         return name;
     }
@@ -59,5 +67,13 @@ public class User {
 
     public File getUserFile() {
         return userFile;
+    }
+
+    public File getProfilePictureFile() {
+        return profilePictureFile;
+    }
+
+    public Image getProfilePicture() {
+        return this.profilePicture;
     }
 }
