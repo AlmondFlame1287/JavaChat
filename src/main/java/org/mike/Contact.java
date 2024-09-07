@@ -15,21 +15,16 @@ public class Contact {
     private String userIP;
     private File messageFile;
 
-    private Rectangle rectangle;
     private Image profilePicture;
-    public static int latestRectangleYPos = 20;
 
     public Contact(String name, String userIP) {
         this.name = name;
         this.userIP = userIP;
         this.createContactFile();
-        rectangle = new Rectangle(10, latestRectangleYPos, 400, 60);
-        latestRectangleYPos += 60;
     }
 
     public void loadProfilePicture() {
-        // TODO: fix this path
-        final File pfpFile = new File(Constants.CONTACT_MESSAGES_PATH + "pfp.jpg");
+        final File pfpFile = new File(Constants.CONTACT_MESSAGES_PATH + this.name + "/pfp.jpg");
         if(!pfpFile.exists()) return;
 
         try {
@@ -45,8 +40,6 @@ public class Contact {
     public String getUserIP() {
         return userIP;
     }
-
-    public Rectangle getRectangle() { return rectangle; }
 
     public void createContactFile() {
         this.messageFile = new File(Constants.CONTACT_MESSAGES_PATH + "to" + this.name + ".txt");
