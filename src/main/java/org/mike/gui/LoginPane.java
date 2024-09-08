@@ -6,12 +6,17 @@ import org.mike.gui.components.customs.CustomButton;
 import org.mike.gui.components.customs.CustomTextField;
 
 import javax.swing.*;
+import java.awt.*;
+
+import static org.mike.common.Constants.*;
 
 public class LoginPane extends JPanel {
     private CustomTextField profileName;
     private final JFrame parentClass;
+    private static int profileNameY;
 
     public LoginPane(JFrame parentClass) {
+        this.setSize(new Dimension(COMMON_WIDTH, COMMON_HEIGHT));
         this.parentClass = parentClass;
         this.setLayout(null);
         this.initTextFields();
@@ -20,14 +25,24 @@ public class LoginPane extends JPanel {
     }
 
     private void initTextFields() {
-        JLabel profile = new JLabel("Profile name:");
+        final JLabel profile = new JLabel("Profile name:");
         profileName = new CustomTextField();
 
         this.add(profile);
         this.add(profileName);
 
-        profile.setBounds(540, 180, 100, 20);
-        profileName.setBounds(540, 200, 200, 25);
+        final int profileW = 100;
+        final int profileH = 20;
+        final int profileNameW = 200;
+        final int profileNameH = 30;
+
+        final int elemX = (this.getWidth() / WIDTH_DIVIDE_FACTOR) * 2 - profileW;
+
+        final int profileY = (this.getHeight() / 2) - profileH - (profileNameH * 2);
+        profileNameY = profileY + profileH;
+
+        profile.setBounds(elemX, profileY, profileW, profileH);
+        profileName.setBounds(elemX, profileNameY, profileNameW, profileNameH);
     }
 
     private void initButtons() {
@@ -37,8 +52,15 @@ public class LoginPane extends JPanel {
         this.add(done);
         this.add(cancel);
 
-        done.setBounds(540, 230, 100, 20);
-        cancel.setBounds(640, 230, 100, 20);
+        final int buttonW = 100;
+        final int buttonH = 20;
+        final int buttonY = (this.getHeight() / 2) - buttonH;
+
+        final int doneX = (this.getWidth() / 2) - buttonW;
+        final int cancelX = doneX + buttonW;
+
+        done.setBounds(doneX, buttonY, buttonW, buttonH);
+        cancel.setBounds(cancelX, buttonY, buttonW, buttonH);
 
         done.addActionListener(evt -> this.onDone());
         cancel.addActionListener(evt -> System.exit(0));
