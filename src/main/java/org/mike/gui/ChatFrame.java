@@ -7,12 +7,11 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-import static org.mike.common.Constants.CHAT_PATH;
-import static org.mike.common.Constants.VERSION;
+import static org.mike.common.Constants.*;
 
 public class ChatFrame extends JFrame {
     public ChatFrame() {
-        this.setSize(1280, 720);
+        this.setSize(COMMON_WIDTH, COMMON_HEIGHT);
         this.setResizable(false);
         this.setContentPane(new LoginPane(this));
         this.setLocationRelativeTo(null);
