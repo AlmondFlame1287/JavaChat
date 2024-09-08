@@ -23,7 +23,8 @@ public class ChatFrame extends JFrame {
     }
 
     private void setupIcon() {
-        final File icon = new File(CHAT_PATH + "icon.jpg");
+        final String stringedIconPath = CHAT_PATH.toString() + File.separatorChar + "icon.jpg";
+        final File icon = new File(stringedIconPath);
         try {
             if(icon.exists()) {
                 this.setIconImage(ImageIO.read(icon));
