@@ -6,9 +6,13 @@ import org.mike.gui.components.ContactArea;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import static org.mike.common.Constants.*;
 
 public class Server implements Runnable {
@@ -51,7 +55,10 @@ public class Server implements Runnable {
 
     public boolean startPictureServer() {
         serverLogger.entering("Server", "startPictureServer");
-        final String filePath = CONTACT_MESSAGES_PATH + ContactArea.getInstance().getContactName() + "/pfp.jpg";
+
+        // Get contact name is always null because contacts haven't been initialized yet
+        // Hence removed
+        final String filePath = CONTACT_MESSAGES_PATH.toString() + File.separatorChar + "pfp.jpg";
 
         try(
                 final ServerSocket pictureServer = new ServerSocket(PICTURE_PORT);
@@ -95,7 +102,6 @@ public class Server implements Runnable {
 
                 serverLogger.info("Message got from client: " + message);
             }
-
         } catch(IOException ioe) {
             serverLogger.severe("There was a problem handling communication: " + ioe.getMessage());
         }
@@ -116,17 +122,27 @@ public class Server implements Runnable {
         }
     }
 
+    private void renamePfp() {
+        final Path pfpPath = Paths.get(CONTACT_MESSAGES_PATH + "/pfp.jpg").normalize();
+        final Path newPfpPath = Paths.get(CONTACT_MESSAGES_PATH + "/" + ContactArea.getInstance().getContactName() + ".jpg").normalize();
+
+        try {
+            Files.copy(pfpPath, newPfpPath, REPLACE_EXISTING);
+        } catch (IOException ignored) {}
+    }
+
     @Override
     public void run() {
         final boolean imageReceived = this.startPictureServer();
-        this.startCommunicationServer();
 
         if(imageReceived) {
             final ContactArea contactArea = ContactArea.getInstance();
             contactArea.getContact().loadProfilePicture();
             contactArea.drawProfilePicture();
+            this.renamePfp();
         }
 
+        this.startCommunicationServer();
         this.handleCommunication();
     }
 }
