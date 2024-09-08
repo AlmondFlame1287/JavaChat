@@ -6,6 +6,8 @@ import org.mike.gui.content.LeftView;
 
 import javax.swing.*;
 
+import static org.mike.common.Constants.LEFT_COMPONENTS_WIDTH;
+
 public class ContentPane extends JSplitPane {
     public ContentPane() {
         final ChatView chatView = new ChatView();
@@ -18,7 +20,7 @@ public class ContentPane extends JSplitPane {
         this.setLeftComponent(scrollPane);
         this.setRightComponent(chatView);
 
-        this.setDividerLocation(427);
+        this.setDividerLocation(LEFT_COMPONENTS_WIDTH);
         this.setEnabled(false);
     }
 }

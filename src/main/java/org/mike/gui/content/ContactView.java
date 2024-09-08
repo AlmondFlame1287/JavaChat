@@ -11,14 +11,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static org.mike.common.Constants.*;
+
 public class ContactView extends JPanel {
     private static ContactView instance;
 
     private final ArrayList<Contact> contacts;
 
     private ContactView() {
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setPreferredSize(new Dimension(427, 620));
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        this.setPreferredSize(new Dimension(LEFT_COMPONENTS_WIDTH, (COMMON_HEIGHT / HEIGHT_DIVIDE_FACTOR) * 7));
         this.contacts = readContacts();
         this.addContacts();
     }
