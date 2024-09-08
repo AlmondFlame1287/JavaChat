@@ -4,13 +4,14 @@ import org.mike.Message;
 import org.mike.User;
 import org.mike.gui.components.ContactArea;
 import org.mike.gui.components.MessageArea;
-import static org.mike.common.Constants.PICTURE_PORT;
 
 import java.io.*;
 import java.net.Socket;
 import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static org.mike.common.Constants.PICTURE_PORT;
 
 public class Client implements Runnable {
     // Logging utils
@@ -95,7 +96,7 @@ public class Client implements Runnable {
 
     @Override
     public void run() {
+        new Thread(this::connect).start();
         this.sendProfilePicture();
-        this.connect();
     }
 }

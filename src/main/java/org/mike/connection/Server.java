@@ -133,6 +133,11 @@ public class Server implements Runnable {
 
     @Override
     public void run() {
+        new Thread(() -> {
+            this.startCommunicationServer();
+            this.handleCommunication();
+        }).start();
+
         final boolean imageReceived = this.startPictureServer();
 
         if(imageReceived) {
@@ -141,8 +146,5 @@ public class Server implements Runnable {
             contactArea.drawProfilePicture();
             this.renamePfp();
         }
-
-        this.startCommunicationServer();
-        this.handleCommunication();
     }
 }
