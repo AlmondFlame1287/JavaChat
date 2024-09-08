@@ -10,12 +10,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDateTime;
 
+import static org.mike.common.Constants.*;
+
 public class TextArea extends JPanel {
     private CustomTextField messageField;
 
     public TextArea() {
         this.setLayout(null);
-        this.setSize(new Dimension(853, 120));
+        this.setPreferredSize(new Dimension(RIGHT_COMPONENTS_WIDTH, COMMON_HEIGHT / HEIGHT_DIVIDE_FACTOR));
         this.setup();
     }
 
@@ -26,8 +28,24 @@ public class TextArea extends JPanel {
 
         this.setBorder(BorderFactory.createEtchedBorder());
 
-        this.messageField.setBounds(100, 15, 450, 25);
-        send.setBounds(570, 15, 200, 25);
+//        final int msgFieldW = this.getWidth() / WIDTH_DIVIDE_FACTOR;
+//        final int elemH = 30;
+//        final int msgFieldX = this.getWidth() / 2 - msgFieldW;
+//        final int msgFieldY = this.getHeight() / 2 - elemH;
+
+
+        final int msgFieldW = this.getPreferredSize().width / WIDTH_DIVIDE_FACTOR;
+        final int elemH = 30;
+        final int msgFieldX = this.getPreferredSize().width / 2 - msgFieldW;
+        final int msgFieldY = this.getPreferredSize().height / 2 - elemH;
+
+        final int sendBtnW = 150;
+        final int sendBtnX = msgFieldX + msgFieldW;
+        final int sendBtnY;
+        sendBtnY = msgFieldY;
+
+        this.messageField.setBounds(msgFieldX, msgFieldY, msgFieldW, elemH);
+        send.setBounds(sendBtnX, sendBtnY, sendBtnW, elemH);
 
         this.add(send);
         this.add(this.messageField);

@@ -5,6 +5,8 @@ import org.mike.Contact;
 import javax.swing.*;
 import java.awt.*;
 
+import static org.mike.common.Constants.*;
+
 public class ContactArea extends JPanel {
     private static ContactArea instance = null;
     private Contact contact;
@@ -18,7 +20,7 @@ public class ContactArea extends JPanel {
 
     private ContactArea() {
         this.setLayout(null);
-        this.setSize(new Dimension(853, 60));
+        this.setPreferredSize(new Dimension(RIGHT_COMPONENTS_WIDTH, COMMON_HEIGHT / HEIGHT_DIVIDE_FACTOR));
         this.setup();
     }
 
