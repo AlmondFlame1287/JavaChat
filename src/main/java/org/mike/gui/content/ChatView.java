@@ -15,7 +15,7 @@ public class ChatView extends JPanel {
 
 
     public ChatView() {
-        this.setLayout(null);
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.contactArea = ContactArea.getInstance();
         this.messageArea = MessageArea.getInstance();
         this.textArea = new TextArea();
@@ -26,13 +26,11 @@ public class ChatView extends JPanel {
     private void addAreas() {
         this.add(contactArea);
 
-        final JScrollPane scrollPane = new JScrollPane(messageArea);
-        this.add(scrollPane);
-        this.add(textArea);
+        final JScrollPane scrollMessageArea = new JScrollPane(messageArea);
+        this.add(scrollMessageArea);
+        scrollMessageArea.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollMessageArea.setVerticalScrollBar(new CustomScrollBar());
 
-        this.contactArea.setBounds(0, 0, 853, 100);
-        scrollPane.setVerticalScrollBar(new CustomScrollBar());
-        scrollPane.setBounds(0, 101, 824, 501);
-        this.textArea.setBounds(0, 602, 853, 80);
+        this.add(textArea);
     }
 }
