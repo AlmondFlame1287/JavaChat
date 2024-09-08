@@ -7,6 +7,7 @@ import java.awt.*;
 
 import static org.mike.common.Constants.*;
 
+// TODO: Continue solving problems about resolution and sizing
 public class ContactArea extends JPanel {
     private static ContactArea instance = null;
     private Contact contact;
@@ -30,7 +31,13 @@ public class ContactArea extends JPanel {
 
         this.contactName = new JLabel();
 
-        this.contactName.setBounds(200, 35, 200, 20);
+        final int w = 150;
+        final int h = 30;
+        final int x = this.getPreferredSize().width - w * 2;
+        final int y = this.getPreferredSize().height - h / 2;
+
+        // Default values 200, 35, 200, 20
+        this.contactName.setBounds(x, y, w, h);
         this.add(this.contactName);
     }
 
@@ -38,8 +45,14 @@ public class ContactArea extends JPanel {
         Image toDraw = this.contact.getProfilePicture();
         if(toDraw == null) return;
 
-        toDraw = toDraw.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-        this.getGraphics().drawImage(toDraw, 0, 0, null);
+        final int height = this.getPreferredSize().height * 2;
+        final int width = 100;
+
+        final int x = this.getPreferredSize().width - width * 4;
+        final int y = 0;
+
+        toDraw = toDraw.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        this.getGraphics().drawImage(toDraw, x, y, null);
     }
 
     public void setContact(Contact current) {
