@@ -1,11 +1,11 @@
 package org.mike;
 
-import org.mike.common.Constants;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+
+import static org.mike.common.Constants.CONTACT_MESSAGES_PATH;
 
 public class Contact {
     // TODO: Add a bio
@@ -24,14 +24,18 @@ public class Contact {
     }
 
     public void loadProfilePicture() {
-        final File pfpFile = new File(Constants.CONTACT_MESSAGES_PATH + this.name + "/pfp.jpg");
-        if(!pfpFile.exists()) return;
+        final String stringedPfpFilePath = CONTACT_MESSAGES_PATH.toString() + File.separatorChar + this.name +".jpg";
+        final File pfpFile = new File(stringedPfpFilePath);
 
         try {
+            if(!pfpFile.exists()) { // If the named pfp file doesn't exist then just get the temp pfp
+                this.profilePicture = ImageIO.read(new File(stringedPfpFilePath.replace(this.name, "pfp")));
+                return;
+            }
+
             this.profilePicture = ImageIO.read(pfpFile);
         } catch (IOException ignored) {}
     }
-
 
     public String getName() {
         return name;
@@ -42,7 +46,8 @@ public class Contact {
     }
 
     public void createContactFile() {
-        this.messageFile = new File(Constants.CONTACT_MESSAGES_PATH + "to" + this.name + ".txt");
+        final String stringedMessageFilePath = CONTACT_MESSAGES_PATH.toString() + File.separatorChar + "to" + this.name + ".txt";
+        this.messageFile = new File(stringedMessageFilePath);
 
         if(messageFile.exists())
             return;
