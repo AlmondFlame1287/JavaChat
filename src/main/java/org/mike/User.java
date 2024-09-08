@@ -1,9 +1,12 @@
 package org.mike;
 
-import org.mike.common.Constants;
-
 import java.awt.*;
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import static org.mike.common.Constants.CHAT_PATH;
 
 public class User {
     private static User instance;
@@ -23,13 +26,13 @@ public class User {
     }
 
     public void createUserFile() {
-        this.userFile = new File(Constants.CHAT_PATH + this.name + ".txt");
+        final String stringedPath = CHAT_PATH.toString() + File.separatorChar + this.name + ".txt";
+        this.userFile = new File(stringedPath);
 
         if(userFile.exists())
             return;
 
         try {
-            new File(Constants.CHAT_PATH).mkdirs();
             userFile.createNewFile();
         } catch(IOException ioe) {
             System.err.println("There was a problem creating the user file: " + ioe.getMessage());
