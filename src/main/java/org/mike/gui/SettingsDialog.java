@@ -3,14 +3,14 @@ package org.mike.gui;
 import org.mike.User;
 import org.mike.gui.content.ProfileView;
 
-import static org.mike.common.Constants.USER_DIR;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
+import static org.mike.common.Constants.USER_DIR;
 
 public class SettingsDialog extends JDialog {
     private static Image img;
@@ -53,7 +53,7 @@ public class SettingsDialog extends JDialog {
     }
 
     private void chooseFilePressed() {
-        JFileChooser jfc = new JFileChooser(USER_DIR);
+        final JFileChooser jfc = new JFileChooser(USER_DIR.toString());
         final int result = jfc.showOpenDialog(this);
 
         if(result != JFileChooser.APPROVE_OPTION) return;
