@@ -21,20 +21,19 @@ public class ContactArea extends JPanel {
 
     private ContactArea() {
         this.setLayout(null);
-        this.setPreferredSize(new Dimension(RIGHT_COMPONENTS_WIDTH, COMMON_HEIGHT / HEIGHT_DIVIDE_FACTOR));
+        this.setSize(new Dimension(RIGHT_COMPONENTS_WIDTH, COMMON_HEIGHT / HEIGHT_DIVIDE_FACTOR));
         this.setup();
     }
 
     private void setup() {
-        // TODO: Further development needed
         this.setBorder(BorderFactory.createEtchedBorder());
 
         this.contactName = new JLabel();
 
         final int w = 150;
         final int h = 30;
-        final int x = this.getPreferredSize().width - w * 2;
-        final int y = this.getPreferredSize().height - h / 2;
+        final int x = (this.getSize().width - w) / 2;
+        final int y = (this.getSize().height - h) / 2;
 
         // Default values 200, 35, 200, 20
         this.contactName.setBounds(x, y, w, h);
@@ -45,14 +44,11 @@ public class ContactArea extends JPanel {
         Image toDraw = this.contact.getProfilePicture();
         if(toDraw == null) return;
 
-        final int height = this.getPreferredSize().height * 2;
+        final int height = this.getSize().height;
         final int width = 100;
 
-        final int x = this.getPreferredSize().width - width * 4;
-        final int y = 0;
-
         toDraw = toDraw.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        this.getGraphics().drawImage(toDraw, x, y, null);
+        this.getGraphics().drawImage(toDraw, 0, 0, null);
     }
 
     public void setContact(Contact current) {

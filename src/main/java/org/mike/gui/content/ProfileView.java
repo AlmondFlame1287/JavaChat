@@ -14,7 +14,7 @@ public class ProfileView extends JPanel {
     private static ProfileView instance = null;
 
     private ProfileView() {
-        this.setPreferredSize(new Dimension(LEFT_COMPONENTS_WIDTH, COMMON_HEIGHT / HEIGHT_DIVIDE_FACTOR));
+        this.setSize(new Dimension(LEFT_COMPONENTS_WIDTH, COMMON_HEIGHT / HEIGHT_DIVIDE_FACTOR));
         this.setLayout(null);
         this.setBorder(BorderFactory.createEtchedBorder());
         this.displayUsername();
@@ -25,9 +25,9 @@ public class ProfileView extends JPanel {
         final JLabel username = new JLabel(User.getUser().getName());
 
         final int w = 100;
-        final int h = 30;
-        final int x = this.getPreferredSize().width / 2 - (w / 4);
-        final int y = this.getPreferredSize().height / 2 - (h / 2);
+        final int h = this.getFontMetrics(this.getFont()).getAscent();
+        final int x = (this.getSize().width - w) / 2;
+        final int y = (this.getSize().height - h) / 2;
 
         username.setBounds(x, y, w, h);
         this.add(username);
@@ -37,22 +37,22 @@ public class ProfileView extends JPanel {
         final Image userPfp = User.getUser().getProfilePicture();
         if(userPfp == null) return;
 
-        final int w = this.getPreferredSize().width / WIDTH_DIVIDE_FACTOR;
-        final int h = this.getPreferredSize().height - 2;
+        final int w = this.getSize().width / WIDTH_DIVIDE_FACTOR;
+        final int h = this.getSize().height - 3;
 
         final Image scaledPfp = userPfp.getScaledInstance(w, h, Image.SCALE_SMOOTH);
-        this.getGraphics().drawImage(scaledPfp, 0, 0, null);
+        this.getGraphics().drawImage(scaledPfp, 0, 1, null);
     }
 
     private void displayButtons() {
         final CustomButton addContact = new CustomButton("Add");
         final CustomButton settings = new CustomButton("Options");
 
-        final int buttonW = 70;
+        final int buttonW = 75;
         final int buttonH = 30;
-        final int buttonX = this.getPreferredSize().width / 3 + buttonW;
+        final int buttonX = this.getSize().width - (buttonW + 15);
 
-        final int addContactY = this.getPreferredSize().height / 2 - buttonH;
+        final int addContactY = this.getSize().height / 2 - buttonH;
         final int settingsY = addContactY + buttonH;
 
         addContact.setBounds(buttonX, addContactY, buttonW, buttonH);
