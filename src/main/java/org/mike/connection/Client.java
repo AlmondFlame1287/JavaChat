@@ -74,7 +74,6 @@ public class Client implements Runnable {
 
         try {
             while((serverMessage = serverReader.readLine()) != null) {
-                // TODO: Check this
                 clientLogger.info("Message got from server:" + serverMessage);
                 MessageArea.getInstance().addMessage(new Message(LocalDateTime.now(), serverMessage, ContactArea.getInstance().getContactName()));
             }

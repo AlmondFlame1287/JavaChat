@@ -7,7 +7,6 @@ import java.awt.*;
 
 import static org.mike.common.Constants.*;
 
-// TODO: Continue solving problems about resolution and sizing
 public class ContactArea extends JPanel {
     private static ContactArea instance = null;
     private Contact contact;

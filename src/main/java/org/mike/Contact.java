@@ -9,7 +9,6 @@ import static org.mike.common.Constants.CONTACT_MESSAGES_PATH;
 
 public class Contact {
     // TODO: Add a bio
-    // TODO: Add profile picture support
 
     private String name;
     private String userIP;
