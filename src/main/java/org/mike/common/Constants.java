@@ -3,6 +3,7 @@ package org.mike.common;
 import java.awt.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.format.DateTimeFormatter;
 
 public final class Constants {
 //    public static final int COMMON_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width / 2;
@@ -21,4 +22,6 @@ public final class Constants {
     public static final Path CONTACT_MESSAGES_PATH =  Paths.get(CHAT_PATH + "/Messages/").normalize();
     public static final int COMMUNICATION_PORT = 59840;
     public static final int PICTURE_PORT = 59841;
+
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy, HH:mm");
 }
