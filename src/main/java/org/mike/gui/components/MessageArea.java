@@ -1,7 +1,6 @@
 package org.mike.gui.components;
 
 import org.mike.Message;
-import org.mike.common.Constants;
 import org.mike.utils.MessageSaver;
 
 import javax.swing.*;
