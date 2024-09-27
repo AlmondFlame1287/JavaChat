@@ -49,6 +49,7 @@ public class Client implements Runnable {
 
     private void sendProfilePicture() {
         clientLogger.entering("Client", "sendProfilePicture");
+        if(User.getUser().getProfilePicture() == null) return;
 
         try (final Socket connection = new Socket(this.ip, PICTURE_PORT);
              final OutputStream outputStream = connection.getOutputStream();
