@@ -1,6 +1,7 @@
 package org.mike.gui.components;
 
 import org.mike.Message;
+import org.mike.utils.MessageSaver;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,6 +29,8 @@ public class MessageArea extends JPanel {
     public void addMessage(Message msg) {
         this.messages.add(msg);
         this.add(msg.getMessageLabel());
+        MessageSaver.getInstance().saveMessage(msg);
+
         this.revalidate();
     }
 

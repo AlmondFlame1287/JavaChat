@@ -2,6 +2,7 @@ package org.mike.gui.components;
 
 import org.mike.Contact;
 import org.mike.connection.Client;
+import org.mike.utils.MessageSaver;
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,6 +51,7 @@ public class ContactButton extends JButton {
                 ContactArea.getInstance().setContact(contact);
                 final Client c = new Client(contact.getUserIP(), COMMUNICATION_PORT);
                 new Thread(c).start();
+                MessageSaver.getInstance().setNewContact(contact);
             }
         });
     }
