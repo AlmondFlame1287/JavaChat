@@ -2,7 +2,7 @@ package org.mike;
 
 import javax.swing.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import static org.mike.common.Constants.DATE_TIME_FORMATTER;
 
 public class Message {
     public static final int MESSAGE_CHARACTER_LIMIT = 300;
@@ -18,9 +18,7 @@ public class Message {
     }
 
     private String formatDateTime(LocalDateTime dateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy, HH:mm");
-
-        return dateTime.format(formatter);
+        return dateTime.format(DATE_TIME_FORMATTER);
     }
 
     private void checkMessageLength(String msg) {
