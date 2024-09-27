@@ -48,10 +48,12 @@ public class ContactButton extends JButton {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                MessageSaver.getInstance().setNewContact(contact);
+                MessageArea.getInstance().loadMessagesFromFile(contact.getMessageFile());
+                MessageArea.getInstance().drawMessages();
                 ContactArea.getInstance().setContact(contact);
                 final Client c = new Client(contact.getUserIP(), COMMUNICATION_PORT);
                 new Thread(c).start();
-                MessageSaver.getInstance().setNewContact(contact);
             }
         });
     }
