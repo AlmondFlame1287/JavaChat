@@ -13,36 +13,26 @@ import java.time.LocalDateTime;
 import static org.mike.common.Constants.*;
 
 public class TextArea extends JPanel {
-    private CustomTextField messageField;
+    private final CustomTextField messageField;
 
     public TextArea() {
-        this.setLayout(null);
-        this.setSize(new Dimension(RIGHT_COMPONENTS_WIDTH, COMMON_HEIGHT / HEIGHT_DIVIDE_FACTOR));
-        this.setup();
+        this.messageField = new CustomTextField();
+        this.initArea();
+        this.addComponents();
     }
 
-    private void setup() {
-        this.messageField = new CustomTextField();
+    private void initArea() {
+        this.setPreferredSize(new Dimension(RIGHT_VIEW_WIDTH, FRAME_HEIGHT /     RIGHT_VIEW_HEIGHT_DIVIDE_FACTOR));
+        this.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
+    }
+
+    private void addComponents() {
         final CustomButton send = new CustomButton("Send");
         send.addActionListener(evt -> this.onSend());
 
-        this.setBorder(BorderFactory.createEtchedBorder());
-
-        final int msgFieldW = this.getSize().width / WIDTH_DIVIDE_FACTOR;
-        final int elemH = 30;
-        final int msgFieldX = this.getSize().width / 2 - msgFieldW;
-        final int msgFieldY = this.getSize().height / 2 - elemH;
-
-        final int sendBtnW = 150;
-        final int sendBtnX = msgFieldX + msgFieldW;
-        final int sendBtnY;
-        sendBtnY = msgFieldY;
-
-        this.messageField.setBounds(msgFieldX, msgFieldY, msgFieldW, elemH);
-        send.setBounds(sendBtnX, sendBtnY, sendBtnW, elemH);
-
-        this.add(send);
+        this.messageField.setMaximumSize(new Dimension(400, 25));
         this.add(this.messageField);
+        this.add(send);
     }
 
     private void onSend() {

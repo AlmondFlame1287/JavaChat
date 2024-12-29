@@ -3,7 +3,6 @@ package org.mike.gui.content;
 import org.mike.User;
 import org.mike.gui.AddContactDialog;
 import org.mike.gui.SettingsDialog;
-import org.mike.gui.components.customs.CustomButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,49 +13,58 @@ public class ProfileView extends JPanel {
     private static ProfileView instance = null;
 
     private ProfileView() {
-        this.setSize(new Dimension(LEFT_COMPONENTS_WIDTH, COMMON_HEIGHT / HEIGHT_DIVIDE_FACTOR));
-        this.setLayout(null);
-        this.setBorder(BorderFactory.createEtchedBorder());
+//        this.setSize(new Dimension(LEFT_COMPONENTS_WIDTH, COMMON_HEIGHT / HEIGHT_DIVIDE_FACTOR));
+//        this.setLayout(null);
+//        this.setBorder(BorderFactory.createEtchedBorder());
+//        this.displayUsername();
+//        this.displayButtons();
+        this.init();
+        this.displayUserImage();
         this.displayUsername();
         this.displayButtons();
     }
 
+    private void init() {
+        this.setPreferredSize(new Dimension(LEFT_VIEW_WIDTH, FRAME_HEIGHT / LEFT_VIEW_HEIGHT_DIVIDE_FACTOR));
+        this.setLayout(new GridLayout(2,2));
+        this.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+    }
+
     public void displayUsername() {
         final JLabel username = new JLabel(User.getUser().getName());
-
-        final int w = 100;
-        final int h = this.getFontMetrics(this.getFont()).getAscent();
-        final int x = (this.getSize().width - w) / 2;
-        final int y = (this.getSize().height - h) / 2;
-
-        username.setBounds(x, y, w, h);
         this.add(username);
     }
 
     public void displayUserImage() {
         final Image userPfp = User.getUser().getProfilePicture();
-        if(userPfp == null) return;
+        if(userPfp == null) {
+            // TODO: Draw a simple user image
+            // For now just have a white box instead
+            this.add(Box.createVerticalBox());
+            return;
+        }
 
-        final int w = this.getSize().width / WIDTH_DIVIDE_FACTOR;
-        final int h = this.getSize().height - 3;
+//        final int w = this.getSize().width / WIDTH_DIVIDE_FACTOR;
+//        final int h = this.getSize().height - 3;
 
-        final Image scaledPfp = userPfp.getScaledInstance(w, h, Image.SCALE_SMOOTH);
-        this.getGraphics().drawImage(scaledPfp, 0, 1, null);
+//        final Image scaledPfp = userPfp.getScaledInstance(w, h, Image.SCALE_SMOOTH);
+//        this.getGraphics().drawImage(scaledPfp, 0, 1, null);
+        final ImageIcon img = new ImageIcon(userPfp);
+
+        userPfp.flush();
+//        scaledPfp.flush();
+
+        JButton pfp = new JButton(img);
+        pfp.setOpaque(false);
+        pfp.setContentAreaFilled(false);
+        pfp.setBorderPainted(false);
+
+        this.add(pfp);
     }
 
     private void displayButtons() {
-        final CustomButton addContact = new CustomButton("Add");
-        final CustomButton settings = new CustomButton("Options");
-
-        final int buttonW = 75;
-        final int buttonH = 30;
-        final int buttonX = this.getSize().width - (buttonW + 15);
-
-        final int addContactY = this.getSize().height / 2 - buttonH;
-        final int settingsY = addContactY + buttonH;
-
-        addContact.setBounds(buttonX, addContactY, buttonW, buttonH);
-        settings.setBounds(buttonX, settingsY, buttonW, buttonH);
+        final JButton addContact = new JButton("Add");
+        final JButton settings = new JButton("Options");
 
         this.add(addContact);
         this.add(settings);

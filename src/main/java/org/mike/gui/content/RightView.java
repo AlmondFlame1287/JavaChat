@@ -8,13 +8,13 @@ import org.mike.gui.components.customs.CustomScrollBar;
 import javax.swing.*;
 
 
-public class ChatView extends JPanel {
+public class RightView extends JPanel {
     private final ContactArea contactArea;
     private final MessageArea messageArea;
     private final TextArea textArea;
 
 
-    public ChatView() {
+    public RightView() {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.contactArea = ContactArea.getInstance();
         this.messageArea = MessageArea.getInstance();

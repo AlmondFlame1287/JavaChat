@@ -24,7 +24,7 @@ public class MessageArea extends JPanel {
 
     private MessageArea() {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        this.setPreferredSize(new Dimension(RIGHT_COMPONENTS_WIDTH, (COMMON_HEIGHT / HEIGHT_DIVIDE_FACTOR) * 5));
+        this.setPreferredSize(new Dimension(RIGHT_VIEW_WIDTH, (FRAME_HEIGHT     / RIGHT_VIEW_HEIGHT_DIVIDE_FACTOR) * (RIGHT_VIEW_HEIGHT_DIVIDE_FACTOR - 2)));
     }
 
     public static MessageArea getInstance() {

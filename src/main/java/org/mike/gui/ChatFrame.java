@@ -11,8 +11,8 @@ import static org.mike.common.Constants.*;
 
 public class ChatFrame extends JFrame {
     public ChatFrame() {
-        this.setSize(COMMON_WIDTH, COMMON_HEIGHT);
-        this.setResizable(false);
+        this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        this.setResizable(true);
         this.setContentPane(new LoginPane(this));
         this.setLocationRelativeTo(null);
         this.setTitle("JavaChat v" + VERSION);

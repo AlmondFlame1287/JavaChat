@@ -19,23 +19,15 @@ public class ContactArea extends JPanel {
     }
 
     private ContactArea() {
-        this.setLayout(null);
-        this.setSize(new Dimension(RIGHT_COMPONENTS_WIDTH, COMMON_HEIGHT / HEIGHT_DIVIDE_FACTOR));
-        this.setup();
+        this.initArea();
     }
 
-    private void setup() {
-        this.setBorder(BorderFactory.createEtchedBorder());
+    private void initArea() {
+        this.setPreferredSize(new Dimension(RIGHT_VIEW_WIDTH, FRAME_HEIGHT / RIGHT_VIEW_HEIGHT_DIVIDE_FACTOR));
+        this.setLayout(new GridLayout(1, 3));
 
         this.contactName = new JLabel();
-
-        final int w = 150;
-        final int h = 30;
-        final int x = (this.getSize().width - w) / 2;
-        final int y = (this.getSize().height - h) / 2;
-
-        // Default values 200, 35, 200, 20
-        this.contactName.setBounds(x, y, w, h);
+        this.add(Box.createHorizontalBox());
         this.add(this.contactName);
     }
 

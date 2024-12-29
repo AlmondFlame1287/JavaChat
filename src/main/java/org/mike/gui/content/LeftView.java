@@ -6,7 +6,7 @@ public class LeftView extends JPanel {
     private static LeftView instance = null;
 
     private LeftView() {
-        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setupPanels();
     }
 
