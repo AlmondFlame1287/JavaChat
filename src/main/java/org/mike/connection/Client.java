@@ -99,7 +99,6 @@ public class Client implements Runnable {
 
     @Override
     public void run() {
-//        new Thread(this::connect).start();
         this.connect();
         this.sendProfilePicture();
     }
