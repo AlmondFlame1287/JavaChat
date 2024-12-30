@@ -43,7 +43,7 @@ public class Client implements Runnable {
             this.handleCommunication();
         } catch (IOException ioe) {
             clientLogger.severe("There was a problem connecting the client: " + ioe.getMessage());
-            System.exit(-1);
+            this.closeClient();
         }
     }
 
@@ -85,18 +85,22 @@ public class Client implements Runnable {
     }
 
     public void closeClient() {
+
         try {
             this.socket.close();
             this.serverReader.close();
         } catch (IOException ioe) {
             clientLogger.severe("Couldn't close client: " + ioe.getMessage());
             System.exit(-1);
+        } catch (NullPointerException npe) {
+            clientLogger.warning("Something went wrong with closing the client: " + npe.getMessage());
         }
     }
 
     @Override
     public void run() {
-        new Thread(this::connect).start();
+//        new Thread(this::connect).start();
+        this.connect();
         this.sendProfilePicture();
     }
 }

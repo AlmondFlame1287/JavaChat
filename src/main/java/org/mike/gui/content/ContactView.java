@@ -2,26 +2,22 @@ package org.mike.gui.content;
 
 import org.mike.Contact;
 import org.mike.User;
-import org.mike.gui.components.ContactButton;
+import org.mike.utils.ContactLister;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 
 import static org.mike.common.Constants.*;
 
 public class ContactView extends JPanel {
     private static ContactView instance;
 
-    private final ArrayList<Contact> contacts;
+//    private final ArrayList<Contact> contacts;
 
     private ContactView() {
-        this.contacts = readContacts();
+//        this.contacts = readContacts();
         this.setPreferredSize(new Dimension(LEFT_VIEW_WIDTH, (FRAME_HEIGHT       / LEFT_VIEW_HEIGHT_DIVIDE_FACTOR) * (LEFT_VIEW_HEIGHT_DIVIDE_FACTOR - 1)));
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setLayout(new BorderLayout(0, 3));
 //        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 //        this.setPreferredSize(new Dimension(LEFT_COMPONENTS_WIDTH, (COMMON_HEIGHT / HEIGHT_DIVIDE_FACTOR) * 7));
         this.addContacts();
@@ -33,39 +29,40 @@ public class ContactView extends JPanel {
         return instance;
     }
 
-    private ArrayList<Contact> readContacts() {
-        User currentUser = User.getUser();
-
-        if(!currentUser.getUserFile().exists())
-            return null;
-
-        ArrayList<Contact> contactArrayList = new ArrayList<>();
-
-        try(FileReader fr = new FileReader(currentUser.getUserFile()); BufferedReader br = new BufferedReader(fr)) {
-            String line;
-            while((line = br.readLine()) != null) {
-                String[] split = line.split(",");
-                contactArrayList.add(new Contact(split[0], split[1]));
-            }
-        } catch(IOException ioe) {
-            System.err.println("There was a problem reading your contacts: " + ioe.getMessage());
-            return null;
-        }
-
-        return contactArrayList;
-    }
+//    private ArrayList<Contact> readContacts() {
+//        User currentUser = User.getUser();
+//
+//        if(!currentUser.getUserFile().exists())
+//            return null;
+//
+//        ArrayList<Contact> contactArrayList = new ArrayList<>();
+//
+//        try(FileReader fr = new FileReader(currentUser.getUserFile()); BufferedReader br = new BufferedReader(fr)) {
+//            String line;
+//            while((line = br.readLine()) != null) {
+//                String[] split = line.split(",");
+//                contactArrayList.add(new Contact(split[0], split[1]));
+//            }
+//        } catch(IOException ioe) {
+//            System.err.println("There was a problem reading your contacts: " + ioe.getMessage());
+//            return null;
+//        }
+//
+//        return contactArrayList;
+//    }
 
     public void addContact(Contact contact) {
         User.getUser().appendContactToFile(contact);
-        this.add(new ContactButton(contact));
+//        this.add(new ContactButton(contact));
+        ContactLister.addToContacts(contact);
         this.revalidate();
     }
 
     private void addContacts() {
-        for(Contact c : this.contacts) {
-            this.add(new ContactButton(c));
-        }
-
+//        for(Contact c : this.contacts) {
+//            this.add(new ContactButton(c));
+//        }
+        this.add(ContactLister.getContactList());
         this.revalidate();
     }
 }
